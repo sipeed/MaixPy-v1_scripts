@@ -20,7 +20,7 @@ label = lv.label(btn)
 label.set_text("Button")
 lv.scr_load(scr)
 
-def on_timer(timer, arg):
+def on_timer(timer):
 	lv.tick_inc(5)
 	
 timer = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PERIODIC, period=5, unit=Timer.UNIT_MS, callback=on_timer, arg=None)
