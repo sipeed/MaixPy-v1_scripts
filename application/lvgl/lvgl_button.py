@@ -13,6 +13,12 @@ disp_drv.disp_flush = lv_h.flush
 disp_drv.disp_fill = lv_h.fill
 lv.disp_drv_register(disp_drv)
 
+indev_drv = lv.indev_drv_t()
+lv.indev_drv_init(indev_drv) 
+indev_drv.type = lv.INDEV_TYPE.POINTER
+indev_drv.read = lv_h.read
+lv.indev_drv_register(indev_drv)
+
 scr = lv.obj()
 btn = lv.btn(scr)
 btn.align(lv.scr_act(), lv.ALIGN.CENTER, 0, 0)
