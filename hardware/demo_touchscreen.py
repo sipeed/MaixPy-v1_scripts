@@ -10,7 +10,7 @@ fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1)
 btn_clear = GPIO(GPIO.GPIO1, GPIO.IN)
 
 lcd.init()
-i2c = I2C(I2C.I2C0, freq=100000, scl=30, sda=31)
+i2c = I2C(I2C.I2C0, freq=400000, scl=30, sda=31)
 ts.init(i2c)
 #ts.calibrate()
 lcd.clear()
