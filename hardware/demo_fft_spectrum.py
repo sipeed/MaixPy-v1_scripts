@@ -1,9 +1,7 @@
 from Maix import GPIO, I2S, AUDIO, FFT
 import image, lcd, math
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 sample_rate = 38640
 sample_points = 1024
@@ -32,7 +30,7 @@ hist_width = int(320 / hist_x_num)#changeable
 x_shift = 0
 while True:
     audio = rx.record(sample_points)
-    fft_res = FFT.run(audio.tobyte(),fft_points)
+    fft_res = FFT.run(audio.to_bytes(),fft_points)
     fft_amp = FFT.amplitude(fft_res)
     img = img.clear()
     x_shift = 0

@@ -2,9 +2,7 @@ import touchscreen as ts
 from machine import I2C
 import lcd, image
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1)
 btn_clear = GPIO(GPIO.GPIO1, GPIO.IN)

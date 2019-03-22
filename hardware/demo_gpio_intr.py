@@ -1,9 +1,7 @@
 import utime
 from Maix import GPIO
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 def test_irq(GPIO, pin_num):
     print("key", pin_num)

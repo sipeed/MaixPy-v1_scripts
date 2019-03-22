@@ -3,10 +3,9 @@ import network
 import gc
 import os
 import lcd, image
+import machine
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 fm.register(board_info.WIFI_RX, fm.fpioa.UART2_TX)
 fm.register(board_info.WIFI_TX, fm.fpioa.UART2_RX)

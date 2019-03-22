@@ -1,9 +1,7 @@
 import utime
 from Maix import GPIO
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 fm.register(board_info.LED_R, fm.fpioa.GPIO0)
 fm.register(board_info.LED_G, fm.fpioa.GPIOHS0)

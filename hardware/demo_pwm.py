@@ -1,9 +1,7 @@
 from machine import Timer,PWM
 import time
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 tim = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PWM)
 ch = PWM(tim, freq=500000, duty=50, pin=board_info.LED_G)

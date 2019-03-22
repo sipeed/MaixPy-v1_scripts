@@ -1,9 +1,7 @@
 from fpioa_manager import fm
 from machine import UART
 from board import board_info
-from fpioa_manager import *
-
-board_info=board_info()
+from fpioa_manager import fm
 
 fm.register(board_info.PIN15, fm.fpioa.UART1_TX)
 fm.register(board_info.PIN17, fm.fpioa.UART1_RX)
