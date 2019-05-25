@@ -1,4 +1,4 @@
-from Maix import GPIO, I2S, AUDIO, FFT
+from Maix import GPIO, I2S, FFT
 import image, lcd, math
 from board import board_info
 from fpioa_manager import fm
@@ -17,8 +17,8 @@ wifi_en=GPIO(GPIO.GPIO0,GPIO.OUT)
 wifi_en.value(0)
 
 fm.register(20,fm.fpioa.I2S0_IN_D0)
-fm.register(30,fm.fpioa.I2S0_WS)    # 19 on Go Board
-fm.register(32,fm.fpioa.I2S0_SCLK)  # 18 on Go Board
+fm.register(30,fm.fpioa.I2S0_WS)    # 19 on Go Board and Bit(new version)
+fm.register(32,fm.fpioa.I2S0_SCLK)  # 18 on Go Board and Bit(new version)
 
 rx = I2S(I2S.DEVICE_0)
 rx.channel_config(rx.CHANNEL_0, rx.RECEIVER, align_mode = I2S.STANDARD_MODE)
