@@ -2,6 +2,8 @@
 from fpioa_manager import *
 from Maix import GPIO
 import time
+from RGB_LED import RGB_LED
+
 
 led_num  = 5  # LED number
 clk_pin  = 21 # borad_info.D[2] # Maixduino D2

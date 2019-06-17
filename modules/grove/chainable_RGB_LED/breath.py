@@ -2,6 +2,7 @@
 from fpioa_manager import *
 from Maix import GPIO
 import time
+from RGB_LED import RGB_LED
 
 
 led_num  = 1  # LED number
