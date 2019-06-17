@@ -1,4 +1,8 @@
 
+from fpioa_manager import *
+from Maix import GPIO
+import time
+
 led_num  = 5  # LED number
 clk_pin  = 21 # borad_info.D[2] # Maixduino D2
 data_pin = 22 # borad_info.D[3] # Maixduino D3
