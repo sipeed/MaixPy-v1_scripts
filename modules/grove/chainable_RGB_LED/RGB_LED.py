@@ -4,9 +4,17 @@ from Maix import GPIO
 import time
 
 class RGB_LED:
-    def __init__(self, clk, data, number_leds, clk_gpiohs=0, data_gpiohs=1 ):
-        fm.register(clk, fm.fpioa.GPIOHS0)
-        fm.register(data, fm.fpioa.GPIOHS1)
+    def __init__(self, clk, data, number_leds, clk_gpiohs=fm.fpioa.GPIOHS0, data_gpiohs=fm.fpioa.GPIOHS1, force_register_io = False ):
+        if force_register_io:
+            fm.register(clk, clk_gpiohs, force=True)
+            fm.register(data, data_gpiohs, force=True)
+        else:
+            ret = fm.register(clk, fm.fpioa.GPIOHS0, force=False)
+            if ret != 1:
+                raise ValueError("pin %d has been registered to func %d" %(ret[0], ret[1]))
+            ret = fm.register(data, fm.fpioa.GPIOHS1, force=False)
+            if ret != 1:
+                raise ValueError("pin %d has been registered to func %d" %(ret[0], ret[1]))
         self.clk = GPIO(GPIO.GPIOHS0, GPIO.OUT)
         self.data = GPIO(GPIO.GPIOHS1, GPIO.OUT)
         self.clk.value(1)

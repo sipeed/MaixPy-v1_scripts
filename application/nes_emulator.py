@@ -6,7 +6,7 @@ AUDIO_PA_EN_PIN = 32      # Maix Go(version 2.20)
 
 # open audio PA
 if AUDIO_PA_EN_PIN:
-    fm.register(AUDIO_PA_EN_PIN, fm.fpioa.GPIO1)
+    fm.register(AUDIO_PA_EN_PIN, fm.fpioa.GPIO1, force=True)
     wifi_en=GPIO(GPIO.GPIO1, GPIO.OUT)
     wifi_en.value(1)
 

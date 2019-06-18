@@ -4,10 +4,10 @@ from Maix import GPIO
 from fpioa_manager import fm, board_info
 
 
-fm.register(8, fm.fpioa.GPIOHS0)
+fm.register(8, fm.fpioa.GPIOHS0, force=True)
 wifi_en=GPIO(GPIO.GPIOHS0, GPIO.OUT)
-fm.register(board_info.WIFI_RX, fm.fpioa.UART2_TX)
-fm.register(board_info.WIFI_TX, fm.fpioa.UART2_RX)
+fm.register(board_info.WIFI_RX, fm.fpioa.UART2_TX, force=True)
+fm.register(board_info.WIFI_TX, fm.fpioa.UART2_RX, force=True)
 
 uart = UART(UART.UART2,115200,timeout=1000, read_buf_len=4096)
 

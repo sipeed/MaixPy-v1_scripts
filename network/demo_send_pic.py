@@ -16,10 +16,10 @@ server_ip      = "192.168.0.183"
 server_port    = 3456
 ##################################
 
-fm.register(8, fm.fpioa.GPIOHS0)
+fm.register(8, fm.fpioa.GPIOHS0, force=True)
 wifi_en=GPIO(GPIO.GPIOHS0,GPIO.OUT)
-fm.register(board_info.WIFI_RX,fm.fpioa.UART2_TX)
-fm.register(board_info.WIFI_TX,fm.fpioa.UART2_RX)
+fm.register(board_info.WIFI_RX,fm.fpioa.UART2_TX, force=True)
+fm.register(board_info.WIFI_TX,fm.fpioa.UART2_RX, force=True)
 
 def wifi_enable(en):
     global wifi_en

@@ -4,7 +4,7 @@ from modules import ultrasonic
 import time
 
 
-fm.register(board_info.D[6], fm.fpioa.GPIOHS0)
+fm.register(board_info.D[6], fm.fpioa.GPIOHS0, force = True)
 
 device = ultrasonic(fm.fpioa.GPIOHS0)
 

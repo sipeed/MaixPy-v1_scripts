@@ -12,13 +12,13 @@ hist_x_num = 50
 lcd.init(freq=15000000)
 
 # close WiFi
-fm.register(8,  fm.fpioa.GPIO0)
+fm.register(8,  fm.fpioa.GPIO0, force=True)
 wifi_en=GPIO(GPIO.GPIO0,GPIO.OUT)
 wifi_en.value(0)
 
-fm.register(20,fm.fpioa.I2S0_IN_D0)
-fm.register(30,fm.fpioa.I2S0_WS)    # 19 on Go Board and Bit(new version)
-fm.register(32,fm.fpioa.I2S0_SCLK)  # 18 on Go Board and Bit(new version)
+fm.register(20,fm.fpioa.I2S0_IN_D0, force=True)
+fm.register(30,fm.fpioa.I2S0_WS, force=True)    # 19 on Go Board and Bit(new version)
+fm.register(32,fm.fpioa.I2S0_SCLK, force=True)  # 18 on Go Board and Bit(new version)
 
 rx = I2S(I2S.DEVICE_0)
 rx.channel_config(rx.CHANNEL_0, rx.RECEIVER, align_mode = I2S.STANDARD_MODE)

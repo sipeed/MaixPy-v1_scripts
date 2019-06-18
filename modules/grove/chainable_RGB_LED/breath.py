@@ -12,7 +12,7 @@ data_pin = 22 # borad_info.D[3] # Maixduino D3
 clk_gpiohs_num = 0
 data_gpiohs_num = 1
 
-led = RGB_LED(clk_pin, data_pin, led_num, clk_gpiohs_num, data_gpiohs_num)
+led = RGB_LED(clk_pin, data_pin, led_num, clk_gpiohs_num, data_gpiohs_num, force_register_io=True)
 
 
 r = 0

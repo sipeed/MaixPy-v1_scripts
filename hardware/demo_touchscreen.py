@@ -4,7 +4,7 @@ import lcd, image
 from board import board_info
 from fpioa_manager import fm
 
-fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1)
+fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1, force=True)
 btn_clear = GPIO(GPIO.GPIO1, GPIO.IN)
 
 lcd.init()
