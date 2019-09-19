@@ -6,6 +6,11 @@ from fpioa_manager import fm, board_info
 
 fm.register(8, fm.fpioa.GPIOHS0, force=True)
 wifi_en=GPIO(GPIO.GPIOHS0, GPIO.OUT)
+
+fm.register(0, fm.fpioa.GPIOHS1, force=True)
+wifi_io0_en=GPIO(GPIO.GPIOHS1, GPIO.OUT)
+wifi_io0_en.value(0)
+
 fm.register(board_info.WIFI_RX, fm.fpioa.UART2_TX, force=True)
 fm.register(board_info.WIFI_TX, fm.fpioa.UART2_RX, force=True)
 
