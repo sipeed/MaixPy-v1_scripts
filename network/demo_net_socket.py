@@ -33,6 +33,7 @@ addr = socket.getaddrinfo("dl.sipeed.com", 80)[0][-1]
 sock.connect(addr)
 sock.send('''GET /MAIX/MaixPy/assets/Alice.jpg HTTP/1.1
 Host: dl.sipeed.com
+cache-control: no-cache
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
