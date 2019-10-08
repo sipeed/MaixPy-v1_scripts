@@ -1,14 +1,8 @@
-import usocket
-import network
-import gc
-import os
+import usocket, network, time
 import lcd, image
-import machine
 from Maix import GPIO
 from machine import UART
-from board import board_info
-from fpioa_manager import fm
-import time
+from fpioa_manager import fm, board_info
 
 
 
@@ -48,12 +42,9 @@ def wifi_reset():
         return None
     return nic
 
-wifi_enable(0)
-time.sleep(1)
-wifi_enable(1)
-time.sleep(2)
-
 nic = wifi_reset()
+if not nic:
+    raise Exception("WiFi init fail")
 
 nic.connect("Sipeed_2.4G","passwd")
 nic.ifconfig()
