@@ -79,6 +79,7 @@ while True:
         sock.connect(addr)
     except Exception as e:
         print("connect error:", e)
+        sock.close()
         continue
     sock.settimeout(5)
 
