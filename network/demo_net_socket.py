@@ -10,10 +10,12 @@ WIFI_PASSWD = "Sipeed123."
 
 
 if WIFI_ESP32 == 0:
+    # for new MaixGO board, if not, remove it
     fm.register(0, fm.fpioa.GPIOHS1, force=True)
     wifi_io0_en=GPIO(GPIO.GPIOHS1, GPIO.OUT)
     wifi_io0_en.value(0)
 
+    # En SEP8285
     fm.register(8, fm.fpioa.GPIOHS0, force=True)
     wifi_en=GPIO(GPIO.GPIOHS0,GPIO.OUT)
     fm.register(board_info.WIFI_RX,fm.fpioa.UART2_TX, force=True)
