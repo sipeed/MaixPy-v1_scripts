@@ -1,3 +1,4 @@
+#refer to http://blog.sipeed.com/p/675.html
 import sensor
 import image
 import lcd
