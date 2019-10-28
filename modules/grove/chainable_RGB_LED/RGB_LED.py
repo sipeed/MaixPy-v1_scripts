@@ -9,14 +9,14 @@ class RGB_LED:
             fm.register(clk, clk_gpiohs, force=True)
             fm.register(data, data_gpiohs, force=True)
         else:
-            ret = fm.register(clk, fm.fpioa.GPIOHS0, force=False)
+            ret = fm.register(clk, clk_gpiohs, force=False)
             if ret != 1:
                 raise ValueError("pin %d has been registered to func %d" %(ret[0], ret[1]))
-            ret = fm.register(data, fm.fpioa.GPIOHS1, force=False)
+            ret = fm.register(data, data_gpiohs, force=False)
             if ret != 1:
                 raise ValueError("pin %d has been registered to func %d" %(ret[0], ret[1]))
-        self.clk = GPIO(GPIO.GPIOHS0, GPIO.OUT)
-        self.data = GPIO(GPIO.GPIOHS1, GPIO.OUT)
+        self.clk = GPIO(GPIO.GPIOHS0+clk_gpiohs-fm.fpioa.GPIOHS0, GPIO.OUT)
+        self.data = GPIO(GPIO.GPIOHS0+data_gpiohs-fm.fpioa.GPIOHS0, GPIO.OUT)
         self.clk.value(1)
         self.data.value(0)
         self.status = []

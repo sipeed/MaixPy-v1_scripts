@@ -6,13 +6,13 @@ from RGB_LED import RGB_LED
 
 
 led_num  = 1  # LED number
-clk_pin  = 21 # borad_info.D[2] # Maixduino D2
-data_pin = 22 # borad_info.D[3] # Maixduino D3
+clk_pin  = 21 # board_info.D[2] # Maixduino D2
+data_pin = 22 # board_info.D[3] # Maixduino D3
 
-clk_gpiohs_num = 0
-data_gpiohs_num = 1
+clk_gpiohs_num = fm.fpioa.GPIOHS0
+data_gpiohs_num = fm.fpioa.GPIOHS1
 
-led = RGB_LED(clk_pin, data_pin, led_num, clk_gpiohs_num, data_gpiohs_num, force_register_io=True)
+led = RGB_LED(clk_pin, data_pin, led_num, clk_gpiohs_num, data_gpiohs_num)
 
 
 r = 0
