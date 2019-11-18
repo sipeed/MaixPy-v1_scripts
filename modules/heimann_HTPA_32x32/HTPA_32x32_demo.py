@@ -1,38 +1,47 @@
-import lcd, image
+import lcd, image, sensor
 from machine import I2C
 from modules import htpa
 
 lcd_w = 320
 lcd_h = 240
 
-# lcd.init(type=2, freq=20000000)
-# lcd.rotation(1)
+edge = (-1,-1,-1,-1,8,-1,-1,-1,-1)
+
+offset_x = 0
+offset_y = 50
+zoom = 2
+rotate = 0
+
+sensor.reset()
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QVGA)
+lcd.init(type=2, freq=20000000)
+lcd.rotation(2)
 # lcd.mirror(1)
-# dev = htpa(i2c=I2C.I2C0, scl_pin=7, sda_pin=6, i2c_freq=1000000)
-lcd.init()
-dev = htpa(i2c=I2C.I2C0, scl_pin=10, sda_pin=11, i2c_freq=1000000)
+dev = htpa(i2c=I2C.I2C0, scl_pin=7, sda_pin=6, i2c_freq=1000000)
+# lcd.init()
+# dev = htpa(i2c=I2C.I2C0, scl_pin=10, sda_pin=11, i2c_freq=1000000)
 sensor_width = dev.width()
 sensor_height = dev.height()
-img = image.Image(size=(32,32))
-img = img.to_grayscale()
+# img = image.Image(size=(32,32))
+# img = img.to_grayscale()
+clock = time.clock()
 while 1:
-    t = time.ticks_ms()
+    clock.tick()
     temperature = dev.temperature()
-    max = temperature[0]
-    min = max
-    max_temp_pos = (0,0)
-    for i in range(1,1024):
-        v = temperature[i]
-        if v < min:
-            min = v
-        if v > max:
-            max = v
-            max_temp_pos = (i%sensor_width, i//sensor_height)
+    min, max, min_pos, max_pos = dev.min_max()
     temp_range = max - min + 1
-    for i in range(0,1024):
-        img[i] = int((temperature[i] - min)/temp_range*255)
-    img2 = img.resize(lcd_w, lcd_h)
-    img2 = img2.to_rainbow(1)
+    img = dev.to_image(min, max)
+    img = img.rotation_corr(z_rotation=90)
+    img = img.replace(img, hmirror=True)
+    max_temp_pos = (max_pos//sensor_width, max_pos%sensor_width)
+    img = img.resize(lcd_w, lcd_h)
+    img = img.to_rainbow(1)
+    img2 = sensor.snapshot()
+    img2.conv3(edge)
+    img2 = img2.rotation_corr(z_rotation=rotate, x_translation=offset_x, y_translation=offset_y, zoom=zoom)
+    img2 = img.blend(img2)
+    del img
     # center
     center_temp = temperature[int(sensor_width/2 + sensor_height/2*sensor_width)]/100.0
     img2 = img2.draw_rectangle(lcd_w//2-36, lcd_h//2, 80, 22, color=(0xff,112,0xff), fill=True)
@@ -49,5 +58,4 @@ while 1:
     img2 = img2.draw_cross(max_temp_pos[0], max_temp_pos[1], color=(0xff,0xff,0xff), thickness=3)
     lcd.display(img2)
     del img2
-    print(1000/(time.ticks_ms()-t))
-
+    print(clock.fps())
