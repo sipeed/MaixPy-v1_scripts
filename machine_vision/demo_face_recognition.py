@@ -36,6 +36,8 @@ img_lcd=image.Image()
 img_face=image.Image(size=(128,128))
 a=img_face.pix_to_ai()
 record_ftr=[]
+record_ftrs=[]
+names = ['Mr.1', 'Mr.2', 'Mr.3', 'Mr.4', 'Mr.5', 'Mr.6', 'Mr.7', 'Mr.8', 'Mr.9' , 'Mr.10'] 
 while(1):
     check_key()
     img = sensor.snapshot()
@@ -52,7 +54,7 @@ while(1):
             # Landmark for face 5 points
             fmap = kpu.forward(task_ld, face_cut_128)
             plist=fmap[:]
-            le=(i.x()+int(plist[0]*i.w()), i.y()+int(plist[1]*i.h()))
+            le=(i.x()+int(plist[0]*i.w() - 10), i.y()+int(plist[1]*i.h()))
             re=(i.x()+int(plist[2]*i.w()), i.y()+int(plist[3]*i.h()))
             nose=(i.x()+int(plist[4]*i.w()), i.y()+int(plist[5]*i.h()))
             lm=(i.x()+int(plist[6]*i.w()), i.y()+int(plist[7]*i.h()))
@@ -72,13 +74,31 @@ while(1):
             # calculate face feature vector
             fmap = kpu.forward(task_fe, img_face)
             feature=kpu.face_encode(fmap[:])
-            if record_ftr != []:
-                score = kpu.face_compare(record_ftr, feature)
-                a = img.draw_string(i.x(),i.y(), ("%2.1f"%(score)), color=(255,0,0),scale=2)
+            reg_flag = False
+            scores = []
+            for j in range(len(record_ftrs)):
+                score = kpu.face_compare(record_ftrs[j], feature)
+                scores.append(score)
+            max_score = 0
+            index = 0
+            for k in range(len(scores)):
+                if max_score < scores[k]:
+                    max_score = scores[k]
+                    index = k
+            if max_score > 85:
+                a = img.draw_string(i.x(),i.y(), ("%s :%2.1f" % (names[index], max_score)), color=(0,255,0),scale=2)
             else:
-                if key_pressed == 1:
-                    record_ftr = feature
+                a = img.draw_string(i.x(),i.y(), ("X :%2.1f" % (max_score)), color=(255,0,0),scale=2)
+            if key_pressed == 1:
+                key_pressed = 0
+                record_ftr = feature
+                record_ftrs.append(record_ftr)
             break
     fps =clock.fps()
     print("%2.1f fps"%fps)
     a = lcd.display(img)
+    #kpu.memtest()
+
+#a = kpu.deinit(task_fe)
+#a = kpu.deinit(task_ld)
+#a = kpu.deinit(task_fd)
