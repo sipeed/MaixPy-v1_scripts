@@ -1,8 +1,9 @@
+# Download model from: https://www.maixhub.com/index.php/index/index/detail/id/235
 import sensor,image,lcd
 import KPU as kpu
 import time
 from Maix import FPIOA,GPIO
-task_fd = kpu.load(0x200000) 
+task_fd = kpu.load(0x200000)
 task_ld = kpu.load(0x300000) 
 task_fe = kpu.load(0x400000) 
 clock = time.clock()
