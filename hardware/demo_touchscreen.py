@@ -3,6 +3,7 @@ from machine import I2C
 import lcd, image
 from board import board_info
 from fpioa_manager import fm
+from Maix import GPIO
 
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1, force=True)
 btn_clear = GPIO(GPIO.GPIO1, GPIO.IN)
