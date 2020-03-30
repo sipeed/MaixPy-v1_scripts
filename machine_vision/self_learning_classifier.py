@@ -25,7 +25,7 @@ key = GPIO(GPIO.GPIOHS0, GPIO.PULL_UP)
 
 class_num = 3
 sample_num = 15
-THRESHOLD = 10
+THRESHOLD = 11
 class_names = ['class1', 'class2', 'class3']
 try:
     del model
