@@ -27,6 +27,6 @@ while i<20:
     utime.sleep_ms(500)
 
 fm.unregister(board_info.LED_R, fm.fpioa.GPIO0)
-fm.unregister(board_info.LED_R, fm.fpioa.GPIOHS0)
+fm.unregister(board_info.LED_G, fm.fpioa.GPIOHS0)
 fm.unregister(board_info.BOOT_KEY, fm.fpioa.GPIO1)
 

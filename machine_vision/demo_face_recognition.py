@@ -17,10 +17,12 @@ def check_key():
     global last_key_state
     global key_pressed 
     val=key_gpio.value()
+    key_pressed=0
     if last_key_state == 1 and val == 0:
-        key_pressed=1
-    else:
-        key_pressed=0
+        time.sleep(0.02)        # debouncing
+        val=key_gpio.value()    # read again
+        if val == 0:
+            key_pressed=1
     last_key_state = val
 
 lcd.init()
@@ -92,8 +94,9 @@ while(1):
                 a = img.draw_string(i.x(),i.y(), ("X :%2.1f" % (max_score)), color=(255,0,0),scale=2)
             if key_pressed == 1:
                 key_pressed = 0
-                record_ftr = feature
-                record_ftrs.append(record_ftr)
+                if len(record_ftrs) < len(names): # prevent appending more than the number of names.
+                    record_ftr = feature
+                    record_ftrs.append(record_ftr)
             break
     fps =clock.fps()
     print("%2.1f fps"%fps)
