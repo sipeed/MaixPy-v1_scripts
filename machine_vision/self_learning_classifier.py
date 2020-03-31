@@ -6,6 +6,13 @@ from fpioa_manager import fm, board_info
 import time
 import gc
 
+############### config #################
+class_num = 3
+sample_num = 15
+THRESHOLD = 11
+class_names = ['class1', 'class2', 'class3']
+########################################
+
 
 def draw_string(img, x, y, text, color, scale, bg=None ):
     if bg:
@@ -23,10 +30,6 @@ sensor.set_windowing((224, 224))
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIOHS0)
 key = GPIO(GPIO.GPIOHS0, GPIO.PULL_UP)
 
-class_num = 3
-sample_num = 15
-THRESHOLD = 11
-class_names = ['class1', 'class2', 'class3']
 try:
     del model
 except Exception:
@@ -93,3 +96,10 @@ while 1:
             print("unknown, maybe:", class_names[res_index])
             img = draw_string(img, 2, 2, 'maybe {}'.format(class_names[res_index]), color=lcd.WHITE,scale=2, bg=lcd.RED)
     lcd.display(img)
+
+# You can save trained data to file system by:
+classifier.save("3_classes.classifier")
+
+# Then load :
+# model = kpu.load(0x300000)
+# classifier = kpu.classifier.load(model, "3_class.classifier")
