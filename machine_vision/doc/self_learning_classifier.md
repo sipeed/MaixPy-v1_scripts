@@ -9,7 +9,7 @@ self learning classifier
 * Download kmodel [here](https://www.maixhub.com/index.php/index/index/detail/id/225.html)
 * Flash kmodel and firmware by [kflash_gui](https://github.com/sipeed/kflash_gui)
 * Connect board to PC, open terminal tool like minicom, or use MaixPyIDE
-* Run [demo script](https://github.com/sipeed/MaixPy_scripts/blob/master/machine_vision/self_learning_classifier.py)
+* Run [demo script](../self_learning_classifier.py)
 
 Then you capture train image
 
@@ -18,3 +18,7 @@ Then you capture train image
 * Then it will automatically train the 15 sample images
 * The image type will be displayed on the left top of screen
 
+## save/load
+
+* Use `classifier.save(path)` to save trained data
+* load by `KPU.classifier.load()`, refer to [self_learning_classifier_load.py](../self_learning_classifier_load.py)
