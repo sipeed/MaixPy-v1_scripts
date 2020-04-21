@@ -62,6 +62,6 @@ def pca_mg90(num,start_angle,end_angle,mode,speed):
     elif mode==1:
         off=int(158+end_angle*2.2)
         pca_setpwm(num,0,off)
-
+    #未完待续
 
 pca_init(50,60)
