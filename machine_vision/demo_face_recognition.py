@@ -26,7 +26,6 @@ def set_key_state(*_):
 
 key_gpio.irq(set_key_state, GPIO.IRQ_RISING, GPIO.WAKEUP_NOT_SUPPORT)
 
-
 lcd.init()
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
@@ -103,6 +102,7 @@ while(1):
                 record_ftr = feature
                 record_ftrs.append(record_ftr)
                 start_processing = False
+
             break
     fps = clock.fps()
     print("%2.1f fps" % fps)
