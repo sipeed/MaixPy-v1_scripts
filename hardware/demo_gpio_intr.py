@@ -3,7 +3,7 @@ from Maix import GPIO
 from board import board_info
 from fpioa_manager import fm
 
-def test_irq(GPIO, pin_num):
+def test_irq(pin_num):
     print("key", pin_num)
 
 # register pin to gpiohs0, 

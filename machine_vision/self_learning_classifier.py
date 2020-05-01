@@ -11,6 +11,7 @@ class_num = 3
 sample_num = 15
 THRESHOLD = 11
 class_names = ['class1', 'class2', 'class3']
+board_cube = 0
 ########################################
 
 
@@ -20,12 +21,17 @@ def draw_string(img, x, y, text, color, scale, bg=None ):
     img = img.draw_string(x, y, text, color=color,scale=scale)
     return img
 
-
-lcd.init()
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
 sensor.set_windowing((224, 224))
+if board_cube == 1:
+    sensor.set_vflip(True)
+    sensor.set_hmirror(True)
+    lcd.init(type=2)
+    lcd.rotation(2)
+else:
+    lcd.init()
 
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIOHS0)
 key = GPIO(GPIO.GPIOHS0, GPIO.PULL_UP)
@@ -48,6 +54,9 @@ last_cap_time = 0
 last_btn_status = 1
 while 1:
     img = sensor.snapshot()
+    if board_cube:
+        img = img.rotation_corr(z_rotation=90)
+        img.pix_to_ai()
     # capture img
     if train_status == 0:
         if key.value() == 0:
@@ -77,7 +86,7 @@ while 1:
     if train_status == 0:
         if cap_num >= class_num + sample_num:
             print("start train")
-            img = draw_string(img, 30, 100, "trainning...", color=lcd.WHITE,scale=2, bg=lcd.RED)
+            img = draw_string(img, 30, 100, "training...", color=lcd.WHITE,scale=2, bg=lcd.RED)
             lcd.display(img)
             classifier.train()
             print("train end")

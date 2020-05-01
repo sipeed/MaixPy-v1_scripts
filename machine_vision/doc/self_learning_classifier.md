@@ -18,6 +18,8 @@ Then you capture train image
 * Then it will automatically train the 15 sample images
 * The image type will be displayed on the left top of screen
 
+video on [youtube](https://www.youtube.com/watch?v=aLW1YQrT-2A) or [bilibili](https://www.bilibili.com/video/BV1Ck4y1d7tx)
+
 ## save/load
 
 * Use `classifier.save(path)` to save trained data
