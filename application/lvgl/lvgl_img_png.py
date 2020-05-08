@@ -152,7 +152,7 @@ scr = lv.obj()
 
 lv.img.cache_set_size(2)
 img1 = lv.img(scr)
-img1.align(scr, lv.ALIGN.IN_LEFT_MID, -50, 0)
+img1.align(scr, lv.ALIGN.IN_LEFT_MID, 20, 0)
 img1.set_src(png_img_dsc)
 img1.set_drag(True)
 
