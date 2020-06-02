@@ -1,4 +1,6 @@
-import sensor, lcd, image
+import sensor
+import lcd
+import image
 
 print("init")
 lcd.init(freq=15000000)
@@ -18,5 +20,4 @@ print("read image")
 img_read = image.Image(path)
 lcd.display(img_read)
 print("ok")
-
 
