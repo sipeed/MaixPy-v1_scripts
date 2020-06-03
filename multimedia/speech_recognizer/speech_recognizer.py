@@ -1,5 +1,6 @@
 # Untitled - By: Echo - 周一 5月 4 2020
 
+import _thread
 import os
 import json
 import time
@@ -48,16 +49,17 @@ i2s_dev.channel_config(i2s_dev.CHANNEL_0,
                        cycles=I2S.SCLK_CYCLES_32,
                        align_mode=I2S.STANDARD_MODE)
 i2s_dev.set_sample_rate(sample_rate)
-
+print("------")
 s = SpeechRecognizer(i2s_dev)
+print("------")
 s.set_threshold(0, 0, 20000)  # 设置所处环境的噪声阈值, 环境噪声越大设置最后一个参数越大即可, 其余参数暂时无效
 # -------------------------------------------------------------
 
 #record = False
 record = True
 
-load = False
-#load = True
+#load = False
+load = True
 
 save_data = False
 
@@ -71,18 +73,15 @@ if record == True:
         if (time.ticks_ms() - tim2) > 800:
             key_word_record = not key_word_record
             tim2 = time.ticks_ms()
-
     fm.register(16, fm.fpioa.GPIOHS0)
     key_boot = GPIO(GPIO.GPIOHS0, GPIO.IN)
     key_boot.irq(pins_irq, GPIO.IRQ_FALLING, GPIO.WAKEUP_NOT_SUPPORT, 7)
-
     keyword_num = 3
     model_num = 3
     # Currently supports a maximum of 10 keywords, each recording a maximum of 4 templates
     for i in range(keyword_num):
         # Record three keywords, three times each
         for j in range(model_num):
-
             print("Press the button to record the {} keyword, the {}".format(i+1, j+1))
             while True:
                 if key_word_record == True:
@@ -92,6 +91,11 @@ if record == True:
                     utime.sleep_ms(500)
             key_word_record = False
             s.record(i, j)
+            print('wait record complete....')
+            while (2 != s.get_status()):
+                print('.', end='')
+                time.sleep_ms(500)
+
             #print("frme_num ---->" + str(s.get_model_info(i, j)))
 
             # s.print_model(i, j) # 这里打印大量数据, 会到导致后面打印的内容丢失
@@ -116,9 +120,27 @@ if load == True:
     print("load successful!")
 
 
+def func():
+    while 1:
+        state = s.get_status()
+        print(state)
+        time.sleep(1)
+
+
+# s.get_status()
+#   SR_NONE = 0,
+#   SR_RECORD_WAIT_SPEACKING = 1,
+#   SR_RECORD_SUCCESSFUL = 2,
+#   SR_RECOGNIZER_WAIT_SPEACKING = 3,
+#   SR_RECOGNIZER_SUCCESSFULL = 4,
+#   SR_GET_NOISEING = 5,
+# 
+_thread.start_new_thread(func, ())
+
 while True:
     # recognize
-    ret = s.recognize()
+    s.recognize()
+    ret = s.get_result()
     if ret > 0:
         if ret == 1:
             print("ret:{}-{}".format(ret, "red"))
@@ -126,5 +148,5 @@ while True:
             print("ret:{}-{}".format(ret, "green"))
         elif ret == 3:
             print("ret:{}-{}".format(ret, "blue"))
-    else:
-        print("--")
+    # else:
+        # print("--")
