@@ -1,4 +1,6 @@
 import nes, lcd
+from Maix import GPIO
+from fpioa_manager import fm
 
 # AUDIO_PA_EN_PIN = None  # Bit Dock and old MaixGo
 AUDIO_PA_EN_PIN = 32      # Maix Go(version 2.20)
