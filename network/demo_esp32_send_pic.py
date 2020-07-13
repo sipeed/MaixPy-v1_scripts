@@ -1,6 +1,6 @@
 
 
-# Send image(jpeg) to server and display on server(PC), 
+# Send image(jpeg) to server and display on server(PC),
 # server code refer to ../tools_on_PC/network/pic_server.py
 
 
@@ -8,11 +8,11 @@ import network, socket, time, sensor, image
 from machine import UART
 from Maix import GPIO
 from fpioa_manager import fm, board_info
-
+import lcd
 ########## config ################
 WIFI_SSID = "Sipeed_2.4G"
 WIFI_PASSWD = "Sipeed123."
-server_ip      = "192.168.0.183"
+server_ip      = "192.168.0.133"
 server_port    = 3456
 ##################################
 
@@ -29,11 +29,11 @@ nic = network.ESP32_SPI(cs=fm.fpioa.GPIOHS10,rst=fm.fpioa.GPIOHS11,rdy=fm.fpioa.
 addr = (server_ip, server_port)
 
 clock = time.clock()
-
+lcd.init()
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
-# sensor.skip_frames(time = 2000)
+sensor.skip_frames(time = 2000)
 
 nic = None
 while True:
@@ -81,10 +81,18 @@ while True:
             break
         img = sensor.snapshot()
         lcd.display(img)
-        img = img.compress(quality=20)
+        img = img.compress(quality=60)
         img_bytes = img.to_bytes()
+        print("send len: ", len(img_bytes))
         try:
-            send_len = sock.send(img_bytes)
+            block = int(len(img_bytes)/2048)
+            for i in range(block):
+                send_len = sock.send(img_bytes[i*2048:(i+1)*2048])
+                #time.sleep_ms(500)
+            send_len2 = sock.send(img_bytes[block*2048:])
+            #send_len = sock.send(img_bytes[0:2048])
+            #send_len = sock.send(img_bytes[2048:])
+            #time.sleep_ms(500)
             if send_len == 0:
                 raise Exception("send fail")
         except OSError as e:
@@ -93,12 +101,13 @@ while True:
                 break
         except Exception as e:
             print("send fail:", e)
-            time.sleep() 
+            time.sleep(1)
             err += 1
             continue
         count += 1
         print("send:", count)
         print("fps:", clock.fps())
+        #time.sleep_ms(500)
     print("close now")
     sock.close()
 
