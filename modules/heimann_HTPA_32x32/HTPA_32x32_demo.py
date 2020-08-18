@@ -1,4 +1,4 @@
-import lcd, image, sensor
+import lcd, image, sensor, time
 from machine import I2C
 from modules import htpa
 
