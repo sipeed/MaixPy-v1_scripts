@@ -20,6 +20,8 @@ Usage:
 
 demo video:
 
-<video src="gimbal.mp4" controls="controls" preload="auto">your brower not support play video</video>
+[![](maixpy_gimbal.png)](https://wiki.sipeed.com/maixpy_gimbal.mp4)
+
+<video src="gimbal.mp4" controls="controls" preload="auto">not support play video</video>
 
 
