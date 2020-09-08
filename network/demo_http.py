@@ -4,6 +4,15 @@ from Maix import GPIO
 from machine import UART
 from fpioa_manager import fm, board_info
 
+try:
+    import usocket as _socket
+except:
+    import _socket
+try:
+    import ussl as ssl
+except:
+    import ssl
+
 
 # for new MaixGO board, if not, remove it
 fm.register(0, fm.fpioa.GPIOHS1, force=True)
@@ -47,7 +56,7 @@ nic = wifi_reset()
 if not nic:
     raise Exception("WiFi init fail")
 
-nic.connect("Sipeed_2.4G","passwd")
+nic.connect("Sipeed_2.4G", "passwd")
 nic.ifconfig()
 
 class Response:
@@ -98,7 +107,6 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
         if proto == "http:":
             port = 80
         elif proto == "https:":
-            import ussl
             port = 443
         else:
             raise ValueError("Unsupported protocol: " + proto)
@@ -118,7 +126,7 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
         try:
             s.connect(ai[-1])
             if proto == "https:":
-                s = ussl.wrap_socket(s, server_hostname=host)
+                s = ssl.wrap_socket(s, server_hostname=host)
             s.write(b"%s /%s HTTP/1.0\r\n" % (method, path))
             if not "Host" in headers:
                 s.write(b"Host: %s\r\n" % host)
@@ -206,7 +214,7 @@ headers ={
     "User-Agent": "MaixPy"
 }
 
-res = get("http://dl.sipeed.com/MAIX/MaixPy/assets/Alice.jpg", headers=headers)
+res = get("http://static.sipeed.com/example/MaixPy.jpg", headers=headers)
 print("response:", res.status_code)
 content = res.content
 print("get img, length:{}, should be:{}".format(len(content), int(res.headers['Content-Length'])))
@@ -214,15 +222,13 @@ print("get img, length:{}, should be:{}".format(len(content), int(res.headers['C
 if len(content)!= int(res.headers['Content-Length']):
     print("download img fail, not complete, try again")
 else:
-    print("save to /flash/Alice.jpg")
-    f = open("/flash/Alice.jpg","wb")
+    print("save to /flash/MaixPy.jpg")
+    f = open("/flash/MaixPy.jpg","wb")
     f.write(content)
     f.close()
     del content
     print("save ok")
     print("display")
-    img = image.Image("/flash/Alice.jpg")
+    img = image.Image("/flash/MaixPy.jpg")
     lcd.init()
     lcd.display(img)
-
-
