@@ -14,7 +14,6 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | basic | basic micropython usage |
 | demo  | more demo, applications, Compared to the single routines in other folders, the routines inside may be more complicated |
 | hardware | hardware API usage demo |
-| lib | liberaries for maixpy |
 | machine_vision | demo for vision related, including machine vision and AI processing related |
 | modules   | external modules |
 | multimedia | normal multimedia processing, audio video etc. |
