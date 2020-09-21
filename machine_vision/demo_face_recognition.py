@@ -94,9 +94,8 @@ while (1):
                     max_score = scores[k]
                     index = k
             if max_score > ACCURACY:
-                if index < 10:
-                    a = img.draw_string(i.x(), i.y(), ("%s :%2.1f" % (
-                        names[index], max_score)), color=(0, 255, 0), scale=2)
+                if index >= len(names):
+                    continue
                 else:
                     a = img.draw_string(i.x(), i.y(), ("%s :%2.1f" % (
                         names[index], max_score)), color=(0, 0, 255), scale=2)
