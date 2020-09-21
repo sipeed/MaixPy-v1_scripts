@@ -18,11 +18,13 @@ fm.register(board_info.BOOT_KEY, fm.fpioa.GPIOHS0)
 key_gpio = GPIO(GPIO.GPIOHS0, GPIO.IN)
 start_processing = False
 
+BOUNCE_PROTECTION = 50
+
 
 def set_key_state(*_):
     global start_processing
     start_processing = True
-    utime.sleep_ms(50)
+    utime.sleep_ms(BOUNCE_PROTECTION)
 
 
 key_gpio.irq(set_key_state, GPIO.IRQ_RISING, GPIO.WAKEUP_NOT_SUPPORT)
@@ -49,7 +51,7 @@ names = ['Mr.1', 'Mr.2', 'Mr.3', 'Mr.4', 'Mr.5',
 
 ACCURACY = 85
 
-while(1):
+while (1):
     img = sensor.snapshot()
     clock.tick()
     code = kpu.run_yolo2(task_fd, img)
@@ -60,15 +62,15 @@ while(1):
             face_cut = img.cut(i.x(), i.y(), i.w(), i.h())
             face_cut_128 = face_cut.resize(128, 128)
             a = face_cut_128.pix_to_ai()
-            #a = img.draw_image(face_cut_128, (0,0))
+            # a = img.draw_image(face_cut_128, (0,0))
             # Landmark for face 5 points
             fmap = kpu.forward(task_ld, face_cut_128)
             plist = fmap[:]
-            le = (i.x()+int(plist[0]*i.w() - 10), i.y()+int(plist[1]*i.h()))
-            re = (i.x()+int(plist[2]*i.w()), i.y()+int(plist[3]*i.h()))
-            nose = (i.x()+int(plist[4]*i.w()), i.y()+int(plist[5]*i.h()))
-            lm = (i.x()+int(plist[6]*i.w()), i.y()+int(plist[7]*i.h()))
-            rm = (i.x()+int(plist[8]*i.w()), i.y()+int(plist[9]*i.h()))
+            le = (i.x() + int(plist[0] * i.w() - 10), i.y() + int(plist[1] * i.h()))
+            re = (i.x() + int(plist[2] * i.w()), i.y() + int(plist[3] * i.h()))
+            nose = (i.x() + int(plist[4] * i.w()), i.y() + int(plist[5] * i.h()))
+            lm = (i.x() + int(plist[6] * i.w()), i.y() + int(plist[7] * i.h()))
+            rm = (i.x() + int(plist[8] * i.w()), i.y() + int(plist[9] * i.h()))
             a = img.draw_circle(le[0], le[1], 4)
             a = img.draw_circle(re[0], re[1], 4)
             a = img.draw_circle(nose[0], nose[1], 4)
@@ -79,8 +81,8 @@ while(1):
             T = image.get_affine_transform(src_point, dst_point)
             a = image.warp_affine_ai(img, img_face, T)
             a = img_face.ai_to_pix()
-            #a = img.draw_image(img_face, (128,0))
-            del(face_cut_128)
+            # a = img.draw_image(img_face, (128,0))
+            del (face_cut_128)
             # calculate face feature vector
             fmap = kpu.forward(task_fe, img_face)
             feature = kpu.face_encode(fmap[:])
@@ -96,8 +98,6 @@ while(1):
                     max_score = scores[k]
                     index = k
             if max_score > ACCURACY:
-                if index >= len(names):
-                    continue
                 a = img.draw_string(i.x(), i.y(), ("%s :%2.1f" % (
                     names[index], max_score)), color=(0, 255, 0), scale=2)
             else:
@@ -115,6 +115,6 @@ while(1):
     gc.collect()
     # kpu.memtest()
 
-#a = kpu.deinit(task_fe)
-#a = kpu.deinit(task_ld)
-#a = kpu.deinit(task_fd)
+# a = kpu.deinit(task_fe)
+# a = kpu.deinit(task_ld)
+# a = kpu.deinit(task_fd)
