@@ -7,7 +7,7 @@ from Maix import FPIOA, GPIO
 import gc
 from fpioa_manager import fm
 from board import board_info
-
+import utime
 
 task_fd = kpu.load(0x200000)
 task_ld = kpu.load(0x300000)
@@ -22,6 +22,7 @@ start_processing = False
 def set_key_state(*_):
     global start_processing
     start_processing = True
+    utime.sleep_ms(50)
 
 
 key_gpio.irq(set_key_state, GPIO.IRQ_RISING, GPIO.WAKEUP_NOT_SUPPORT)
