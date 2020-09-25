@@ -9,7 +9,7 @@ sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
 sensor.set_vflip(1)
-sensor.run(1)
+sensor.set_hmirror(1) # set hmirror if can not recognize qr code
 sensor.skip_frames(30)
 while True:
     clock.tick()
