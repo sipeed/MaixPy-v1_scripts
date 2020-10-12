@@ -7,8 +7,8 @@
 import network, socket, time, sensor, image
 from machine import UART
 from Maix import GPIO
-from fpioa_manager import fm, board_info
-
+from fpioa_manager import fm
+from board import board_info
 ########## config ################
 wifi_ap_ssid   = "Sipeed_2.4G"
 wifi_ap_passwd = "Sipeed123."

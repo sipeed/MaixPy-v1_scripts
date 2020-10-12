@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
         #from Maix import GPIO, I2S, FFT
         #import image, lcd, math
-        #from board import board_info
+        #
         #from fpioa_manager import fm
 
         sample_rate = 38640

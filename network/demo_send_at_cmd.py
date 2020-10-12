@@ -1,8 +1,8 @@
 import time
 from Maix import GPIO
 from machine import UART
-from fpioa_manager import fm, board_info
-
+from fpioa_manager import fm
+from board import board_info
 fm.register(0, fm.fpioa.GPIOHS1, force=True)
 wifi_io0_en=GPIO(GPIO.GPIOHS1, GPIO.OUT)
 wifi_io0_en.value(0)

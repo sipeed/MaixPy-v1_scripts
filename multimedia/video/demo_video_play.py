@@ -1,5 +1,5 @@
 from Maix import GPIO
-from board import board_info
+
 from fpioa_manager import fm
 import lcd
 import video

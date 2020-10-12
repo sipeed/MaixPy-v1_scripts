@@ -2,7 +2,8 @@
 
 import network
 from Maix import GPIO
-from fpioa_manager import fm, board_info
+from fpioa_manager import fm
+from board import board_info
 
 # IO map for ESP32 on Maixduino
 fm.register(25,fm.fpioa.GPIOHS10)#cs

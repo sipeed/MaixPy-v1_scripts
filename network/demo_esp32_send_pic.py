@@ -7,7 +7,8 @@
 import network, socket, time, sensor, image
 from machine import UART
 from Maix import GPIO
-from fpioa_manager import fm, board_info
+from fpioa_manager import fm
+from board import board_info
 import lcd
 ########## config ################
 WIFI_SSID = "Sipeed_2.4G"

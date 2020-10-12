@@ -2,7 +2,8 @@ import usocket, network, time
 import lcd, image
 from Maix import GPIO
 from machine import UART
-from fpioa_manager import fm, board_info
+from fpioa_manager import fm
+from board import board_info
 
 try:
     import usocket as _socket

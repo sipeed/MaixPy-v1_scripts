@@ -1,6 +1,6 @@
 import time, sys
 from machine import Timer,PWM
-from fpioa_manager import board_info
+
 from math import pi
 from machine import UART
 

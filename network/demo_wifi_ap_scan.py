@@ -1,8 +1,8 @@
 import network, time
 from machine import UART
 from Maix import GPIO
-from fpioa_manager import fm, board_info
-
+from fpioa_manager import fm
+from board import board_info
 # En SEP8285
 fm.register(8, fm.fpioa.GPIOHS0, force=True)
 wifi_en=GPIO(GPIO.GPIOHS0, GPIO.OUT)

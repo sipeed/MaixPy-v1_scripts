@@ -10,7 +10,7 @@ import time
 num = 0
 switch_status = 0
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIO1, force=True)
-fm.register(board_info.PIN10,fm.fpioa.GPIOHS10,force=True)
+fm.register(board_info.ENTER,fm.fpioa.GPIOHS10,force=True)
 key_shot = GPIO(GPIO.GPIOHS10,GPIO.IN)
 repl_unlock = GPIO(GPIO.GPIO1, GPIO.IN)
 lcd.init(freq=15000000)

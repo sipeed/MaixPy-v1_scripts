@@ -3,10 +3,10 @@ from machine import UART
 from board import board_info
 from fpioa_manager import fm
 
-fm.register(board_info.PIN15, fm.fpioa.UART1_TX, force=True)
-fm.register(board_info.PIN17, fm.fpioa.UART1_RX, force=True)
-fm.register(board_info.PIN9, fm.fpioa.UART2_TX, force=True)
-fm.register(board_info.PIN10, fm.fpioa.UART2_RX, force=True)
+fm.register(board_info.PIN10, fm.fpioa.UART1_TX, force=True)
+fm.register(board_info.PIN11, fm.fpioa.UART1_RX, force=True)
+fm.register(board_info.PIN12, fm.fpioa.UART2_TX, force=True)
+fm.register(board_info.PIN13, fm.fpioa.UART2_RX, force=True)
 
 uart_A = UART(UART.UART1, 115200,8,0,0, timeout=1000, read_buf_len=4096)
 uart_B = UART(UART.UART2, 115200,8,0,0, timeout=1000, read_buf_len=4096)

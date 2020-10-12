@@ -1,10 +1,11 @@
+from board import board_info
 ##############demo1
 from modules import ws2812
 class_ws2812 = ws2812(board_info.D[4],30)
 for i in range(30):
     class_ws2812.set_led(i,(0xff,0,0))
 class_ws2812.display()
-
+from board import board_info
 #############demo2
 from modules import ws2812
 class_ws2812 = ws2812(board_info.D[4],30)

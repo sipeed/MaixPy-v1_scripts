@@ -2,7 +2,8 @@ import KPU as kpu
 import sensor
 import lcd
 from Maix import GPIO
-from fpioa_manager import fm, board_info
+from fpioa_manager import fm
+from board import board_info
 import time
 import gc
 

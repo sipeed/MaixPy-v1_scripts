@@ -1,6 +1,6 @@
 from machine import I2C
 from Maix import GPIO
-from board import board_info
+
 from fpioa_manager import fm
 import utime
 import sensor, image, time

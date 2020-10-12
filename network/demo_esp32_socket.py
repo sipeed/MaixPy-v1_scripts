@@ -2,7 +2,8 @@
 
 import network, socket
 from Maix import GPIO
-from fpioa_manager import fm, board_info
+from fpioa_manager import fm
+from board import board_info
 import time
 
 WIFI_SSID = "Sipeed_2.4G"

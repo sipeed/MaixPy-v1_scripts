@@ -2,7 +2,7 @@
 from fpioa_manager import *
 from modules import ultrasonic
 import time
-
+from board import board_info
 
 fm.register(board_info.D[6], fm.fpioa.GPIOHS0, force = True)
 
