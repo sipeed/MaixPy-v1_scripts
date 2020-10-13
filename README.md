@@ -12,6 +12,7 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | --------- | ----------- |
 | application | applications integraged to firmware |
 | basic | basic micropython usage |
+| board | run python code, config your sipeed hardware |
 | demo  | more demo, applications, Compared to the single routines in other folders, the routines inside may be more complicated |
 | hardware | hardware API usage demo |
 | machine_vision | demo for vision related, including machine vision and AI processing related |
@@ -27,6 +28,7 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | --------- | ----------- |
 | application | 内置到固件中的应用 |
 | basic | 基本的 micropython 使用 |
+| board | 运行 Python 代码，配置你的 sipeed 硬件 |
 | demo  | 更多的例程,像较与其它文件夹中的单一的功能示例,这里面的可能相对复杂一点 |
 | hardware | 硬件 API 使用例程 |
 | machine_vision | 视觉处理相关,包括机器视觉以及AI处理 |
