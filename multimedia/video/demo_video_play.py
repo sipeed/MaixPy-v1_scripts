@@ -11,6 +11,13 @@ lcd.init()
 AUDIO_PA_EN_PIN = 32      # Maix Go(version 2.20)
 # AUDIO_PA_EN_PIN = 2     # Maixduino
 
+# init i2s(i2s0)
+i2s = I2S(I2S.DEVICE_0)
+
+# config i2s according to audio info
+i2s.channel_config(i2s.CHANNEL_1, I2S.TRANSMITTER, resolution=I2S.RESOLUTION_16_BIT,
+                       cycles=I2S.SCLK_CYCLES_32, align_mode=I2S.RIGHT_JUSTIFYING_MODE)
+
 # open audio PA
 if AUDIO_PA_EN_PIN:
     fm.register(AUDIO_PA_EN_PIN, fm.fpioa.GPIO1, force=True)

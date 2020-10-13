@@ -1,4 +1,5 @@
 from machine import SPI
+from Maix import GPIO
 from fpioa_manager import fm
 
 mosi=8

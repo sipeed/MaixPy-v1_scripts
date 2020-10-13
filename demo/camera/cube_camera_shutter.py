@@ -25,7 +25,7 @@ while(repl_unlock.value() != 0):
     clock.tick()
     img = sensor.snapshot()
     if key_shot.value() == 0:
-        path = "/sd/kamera-" + str(num) + ".jpg"
+        path = "/flash/camera-" + str(num) + ".jpg"
         lcd.draw_string(80,40,"Saved :)",lcd.RED,lcd.WHITE)
         time.sleep(1)
         img.save(path)
