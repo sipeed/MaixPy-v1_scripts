@@ -1,4 +1,4 @@
-from Maix import GPIO
+from Maix import GPIO, I2S
 
 from fpioa_manager import fm
 import lcd
