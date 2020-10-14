@@ -10,7 +10,7 @@ sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
 sensor.run(1)
 sensor.skip_frames(30)
-v = video.open("/sd/capture.avi", record=1, interval=200000, quality=50)
+v = video.open("/sd/capture.avi", audio = False, record=1, interval=200000, quality=50)
 i = 0
 tim = time.ticks_ms()
 
