@@ -1,4 +1,4 @@
-
+# for amigo_switch_sensor
 import sensor, image, time, lcd
 
 from machine import I2C, Timer
