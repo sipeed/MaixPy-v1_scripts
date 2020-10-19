@@ -1,6 +1,6 @@
 from machine import I2C
 import nes, lcd, sys, time
-from sound import CubeAudio
+from sound import CubeAudio # see ../modules/es8374 put sound.py and es8374.py
 from fpioa_manager import fm
 from Maix import FPIOA, GPIO
 
