@@ -1,4 +1,4 @@
-
+# for amigo_switch_sensor
 import sensor, image, time, lcd
 
 from machine import I2C, Timer
@@ -64,7 +64,7 @@ while True:
         sensor.set_vflip(1)
         sensor.skip_frames(time=2000)
         for i in range(50):
-            img = sensor.snapshot()
+            img = sensor.snapshot() # .rotation_corr(x_rotation = 180, z_rotation = +90)
             lcd.display(img)
 
     except Exception as e:
