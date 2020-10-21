@@ -5,6 +5,7 @@ import sys, time
 from fpioa_manager import fm
 from Maix import FPIOA, GPIO
 
+from machine import I2C
 #i2c = I2C(I2C.I2C1, freq=100*1000, sda=31, scl=30) # cube
 i2c = I2C(I2C.I2C3, freq=100*1000, sda=27, scl=24) # amigo
 CubeAudio.init(i2c)
@@ -29,6 +30,8 @@ fm.fpioa.set_function(34,fm.fpioa.I2S0_OUT_D2)
 
 CubeAudio.i2s.set_sample_rate(44100)
 
+i2c = I2C(I2C.I2C0, freq=400*1000, sda=27, scl=24)
+
 lcd.init(freq=15000000)
 lcd.register(0x36, 0x20) # amigo
 # lcd.register(0x36, 0x68) # cube
@@ -47,12 +50,12 @@ try:
     nes.input(8, 0, 0)
     nes.loop()
     nes.input(0, 0, 0)
+    nes.loop()
   while True:
-    # tmp = i2c.readfrom(66, 1)
-    # for i in range(10):
-    #   nes.loop()
+    # tmp = i2c.readfrom(66, 1) # handle i2c addr
+    # tmp = i2c.readfrom(74, 1) # handle i2c addr
     # nes.input(tmp[0], 0, 0)
-    # for i in range(10):
+    # for i in range(100):
     #   nes.loop()
     nes.loop()
 finally:
