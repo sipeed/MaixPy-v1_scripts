@@ -12,6 +12,12 @@ import utime
 task_fd = kpu.load(0x200000)
 task_ld = kpu.load(0x300000)
 task_fe = kpu.load(0x400000)
+
+# amigo
+# task_fd = kpu.load(0x2C0000)
+# task_ld = kpu.load(0x580000)
+# task_fe = kpu.load(0x340000)
+
 clock = time.clock()
 
 fm.register(board_info.BOOT_KEY, fm.fpioa.GPIOHS0)
