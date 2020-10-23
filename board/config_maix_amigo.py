@@ -1,3 +1,4 @@
+
 import json
 
 config = {
@@ -44,6 +45,16 @@ config = {
 cfg = json.dumps(config)
 print(cfg)
 
+# config sensor
+try:
+  os.remove('/flash/boot.py')
+except:
+  pass
+with open('/flash/boot.py', 'wb') as f:
+  cfg_sensor = b'from machine import I2C\naxp173 = I2C(I2C.I2C0, freq=100000, scl=24, sda=27)\naxp173.writeto_mem(0x34, 0x27, 0x20)\naxp173.writeto_mem(0x34, 0x28, 0x0C)'
+  f.write(cfg_sensor)
+  del cfg_sensor
+
 try:
   with open('/flash/config.json', 'rb') as f:
     tmp = json.loads(f.read())
@@ -55,3 +66,4 @@ except Exception as e:
     f.write(cfg)
   import machine
   machine.reset()
+
