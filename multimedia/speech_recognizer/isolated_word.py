@@ -44,8 +44,8 @@ while True:
     data = sr.get(0)
     print(data)
     break
-  if sr.Speek == sr.state():
-    print('spark A')
+  if sr.Speak == sr.state():
+    print('speak A')
 
 sr.set(1, data)
 
@@ -56,8 +56,8 @@ while True:
     data = sr.get(2)
     print(data)
     break
-  if sr.Speek == sr.state():
-    print('spark B')
+  if sr.Speak == sr.state():
+    print('speak B')
 
 sr.set(3, data)
 
