@@ -17,7 +17,7 @@ config = {
       "cs":26
   },
   "board_info": {
-      'BOOT_KEY': 16,
+      'BOOT_KEY': 23,
       'LED_R': 14,
       'LED_G': 15,
       'LED_B': 17,
