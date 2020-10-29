@@ -9,4 +9,6 @@ print(devices)
 for device in devices:
     i2c.writeto(device, b'123')
     i2c.readfrom(device, 3)
+    # tmp = bytearray(6)
+    # i2c.readfrom_into(device, tmp, True)
 
