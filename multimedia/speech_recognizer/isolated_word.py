@@ -47,7 +47,7 @@ while True:
   if sr.Speak == sr.state():
     print('speak A')
 
-sr.set(1, data)
+#sr.set(1, data)
 
 while True:
   time.sleep_ms(100)
@@ -59,14 +59,17 @@ while True:
   if sr.Speak == sr.state():
     print('speak B')
 
-sr.set(3, data)
+#sr.set(3, data)
 
 ## recognizer
+#sr.stop()
+#sr.run()
+
 print('recognizer')
 while True:
   time.sleep_ms(200)
-  print(sr.state())
-  print(sr.dts(data))
+  #print(sr.state())
+  #print(sr.dtw(data))
   if sr.Done == sr.recognize():
     res = sr.result()
     print(res)
