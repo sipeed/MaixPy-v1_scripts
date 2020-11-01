@@ -1,3 +1,6 @@
+# It is no longer supported, please use the new interface code.
+# 现在已经不被支持，请使用新的接口代码。
+# 2020年11月1日 我留着是用来做应用示例参考的。
 # Untitled - By: Echo - 周一 5月 4 2020
 
 import _thread
