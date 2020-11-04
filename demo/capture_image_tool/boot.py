@@ -117,7 +117,7 @@ def capture_main(key):
         img0 = sensor.snapshot()
         if set_windowing:
             img = image.Image()
-            img = img.draw_image(img0, 48, 16)
+            img = img.draw_image(img0, (img.width() - set_windowing[0])//2, img.height() - set_windowing[1])
         else:
             img = img0.copy()
         # img = img.resize(320, 240)

@@ -2,6 +2,9 @@ Tool: Capture iamges to SD card (工具： 采集图片到 SD 卡)
 =========
 
 
+![screenshot](assets/capture.jpg)
+
+
 Multiple classes supported
 多分类支持
 ---------------
