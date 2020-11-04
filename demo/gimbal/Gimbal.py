@@ -1,3 +1,14 @@
+'''
+    Gimbal demo with classical PID support,
+    @usage Change parameters at the start of main according to your hardware
+           like camera and lcd direction, PID parameters etc.
+
+    @update https://github.com/sipeed/MaixPy_scripts
+    @author neucrack@sipeed
+    @license MIT
+'''
+
+
 import time, sys
 from machine import Timer,PWM
 
