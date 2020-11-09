@@ -27,8 +27,8 @@ print(rx)
 
 from speech_recognizer import isolated_word
 
-# default: dock/maixduino set shift=0
-sr = isolated_word(dmac=2, i2s=I2S.DEVICE_0, size=10, , shift=0) # bit set shift=1
+# default: maix dock / maix duino set shift=0
+sr = isolated_word(dmac=2, i2s=I2S.DEVICE_0, size=10, , shift=0) # maix bit set shift=1
 print(sr.size())
 print(sr)
 
