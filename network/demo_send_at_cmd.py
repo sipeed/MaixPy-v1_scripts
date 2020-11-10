@@ -30,6 +30,7 @@ while 1:
 	read = uart.read()
 	if read:
 		print(read)
-	uart.write("AT+GMR\r\n")
+# 	uart.write("AT+GMR\r\n")
+	uart.write("AT\r\n")
 	time.sleep_ms(500)
 
