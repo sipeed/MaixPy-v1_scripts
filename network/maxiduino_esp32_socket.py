@@ -7,7 +7,7 @@ from board import board_info
 import time
 
 WIFI_SSID = "Sipeed_2.4G"
-WIFI_PASSWD = "xxxxxxxxx"
+WIFI_PASSWD = "Sipeed123."
 SERVER_ADDR = "192.168.0.113"
 SERVER_PORT = 60000
 
@@ -42,24 +42,21 @@ print(nic.isconnected())
 sock = socket.socket()
 sock.connect((SERVER_ADDR, SERVER_PORT))
 
-sock.settimeout(5)
+sock.settimeout(3)
 while 1:
+    sock.send("hello\n")
+    #data = sock.recv(10) # old maxipy have bug (recv timeout no return last data)
+    #print(data) # fix
     try:
-        sock.send("hello\n")
-        #data = sock.recv(10) # old maxipy have bug (recv timeout no return last data)
-        try:
-          data = b""
-          while True:
-            tmp = sock.recv(1)
-            #print(tmp)
-            if len(tmp) == 0:
-                break
-            data += tmp
-        except Exception as e:
-          print("rcv:", len(data), data)
+      data = b""
+      while True:
+        tmp = sock.recv(1)
+        #print(tmp)
+        if len(tmp) == 0:
+            raise Exception('timeout or disconnected')
+        data += tmp
     except Exception as e:
-        print("receive error:", e)
-        continue
-    time.sleep(2)
+      print("rcv:", len(data), data)
+    #time.sleep(2)
 
 sock.close()
