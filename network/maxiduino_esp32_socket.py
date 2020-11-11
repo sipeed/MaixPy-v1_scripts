@@ -7,7 +7,10 @@ from board import board_info
 import time
 
 WIFI_SSID = "Sipeed_2.4G"
-WIFI_PASSWD = "passwd"
+WIFI_PASSWD = "xxxxxxxxx"
+SERVER_ADDR = "192.168.0.113"
+SERVER_PORT = 60000
+
 
 # IO map for ESP32 on Maixduino
 fm.register(25,fm.fpioa.GPIOHS10, force=True)#cs
@@ -35,50 +38,28 @@ while 1:
 print(nic.ifconfig())
 print(nic.isconnected())
 
-err = 0
+
 sock = socket.socket()
+sock.connect((SERVER_ADDR, SERVER_PORT))
+
+sock.settimeout(5)
 while 1:
     try:
-        addr = socket.getaddrinfo("dl.sipeed.com", 80)[0][-1]
-        # addr = socket.getaddrinfo("192.168.0.183", 8099)[0][-1]
-        break
-    except Exception:
-        err += 1
-    if err > 5:
-        raise Exception("get ip failed!")
-sock.connect(addr)
-sock.send('''GET /MAIX/MaixPy/assets/Alice.jpg HTTP/1.1
-Host: dl.sipeed.com
-cache-control: no-cache
-User-Agent: MaixPy
-Connection: close
-
-''')
-
-img = b""
-sock.settimeout(5)
-while True:
-    data = sock.recv(4096)
-    if len(data) == 0: # connection closed
-        break
-    print("rcv:", len(data))
-    img = img + data
+        sock.send("hello\n")
+        #data = sock.recv(10) # old maxipy have bug (recv timeout no return last data)
+        try:
+          data = b""
+          while True:
+            tmp = sock.recv(1)
+            #print(tmp)
+            if len(tmp) == 0:
+                break
+            data += tmp
+        except Exception as e:
+          print("rcv:", len(data), data)
+    except Exception as e:
+        print("receive error:", e)
+        continue
+    time.sleep(2)
 
 sock.close()
-
-print("rcv len:", len(img))
-begin=img.find(b"\r\n\r\n")+4
-print(begin)
-img = img[begin:begin+43756]   ## jpg file size is 43756 byte
-if len(img) != 43756:
-    raise Exception("recv jpg not complete, try again")
-print("image len:", len(img))
-
-import image, lcd
-
-img = image.Image(img, from_bytes=True)
-lcd.init()
-lcd.display(img)
-del img
-
-
