@@ -13,11 +13,20 @@ WIFI_PASSWD = "webduino"
 fm.register(25,fm.fpioa.GPIOHS10)#cs
 fm.register(8,fm.fpioa.GPIOHS11)#rst
 fm.register(9,fm.fpioa.GPIOHS12)#rdy
+
 fm.register(28,fm.fpioa.GPIOHS13)#mosi
 fm.register(26,fm.fpioa.GPIOHS14)#miso
 fm.register(27,fm.fpioa.GPIOHS15)#sclk
 
 nic = network.ESP32_SPI(cs=fm.fpioa.GPIOHS10,rst=fm.fpioa.GPIOHS11,rdy=fm.fpioa.GPIOHS12, mosi=fm.fpioa.GPIOHS13,miso=fm.fpioa.GPIOHS14,sclk=fm.fpioa.GPIOHS15)
+
+print("ESP32_SPI firmware version:", nic.version())
+
+fm.register(28,fm.fpioa.SPI1_D0, force=True)#mosi
+fm.register(26,fm.fpioa.SPI1_D1, force=True)#miso
+fm.register(27,fm.fpioa.SPI1_SCLK, force=True)#sclk
+
+nic = network.ESP32_SPI(cs=fm.fpioa.GPIOHS10, rst=fm.fpioa.GPIOHS11, rdy=fm.fpioa.GPIOHS12, spi=1)
 
 print("ESP32_SPI firmware version:", nic.version())
 
@@ -59,7 +68,11 @@ def main(use_stream=True):
             tmp = ssl.wrap_socket(s, server_hostname=host)
 
             tmp.write(b"GET / HTTP/1.1\r\n\r\n")
-            print(tmp.readline('\r\n'))
+            data = (s.readline('\r\n'))
+            print(data)
+            with open('test.txt', 'wb') as f:
+                f.write(data)
+
         except Exception as e:
           print(e)
 
