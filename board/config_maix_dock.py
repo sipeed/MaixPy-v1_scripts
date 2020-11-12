@@ -11,7 +11,7 @@ config = {
       'WIFI_RX': 7,
       'WIFI_EN': 8,
       'MIC0_WS': 30,
-      'MIC0_DATA': 31,
+      'MIC0_DATA': 20,
       'MIC0_BCK': 32,
       'I2S_WS': 33,
       'I2S_DA': 34,
