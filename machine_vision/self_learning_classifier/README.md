@@ -1,6 +1,3 @@
-
-
-
 self learning classifier
 =====
 
@@ -9,7 +6,7 @@ self learning classifier
 * Download kmodel [here](https://www.maixhub.com/index.php/index/index/detail/id/225.html)
 * Flash kmodel and firmware by [kflash_gui](https://github.com/sipeed/kflash_gui)
 * Connect board to PC, open terminal tool like minicom, or use MaixPyIDE
-* Run [demo script](../self_learning_classifier.py)
+* Run [demo script](self_learning_classifier.py)
 
 Then you capture train image
 
@@ -23,4 +20,5 @@ video on [youtube](https://www.youtube.com/watch?v=aLW1YQrT-2A) or [bilibili](ht
 ## save/load
 
 * Use `classifier.save(path)` to save trained data
-* load by `KPU.classifier.load()`, refer to [self_learning_classifier_load.py](../self_learning_classifier_load.py)
+* load by `KPU.classifier.load()`, refer to [self_learning_classifier_load.py](self_learning_classifier_load.py)
+
