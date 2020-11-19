@@ -30,8 +30,8 @@ jobs:
           SSHPATH="$HOME/.ssh"
           rm -rf "$SSHPATH"
           mkdir -p "$SSHPATH"
-          echo "${{ secrets.GITEE_SYNC_ACCESSS_KEY }}" > "$SSHPATH/key"
-          chmod 600 "$SSHPATH/key"
+          echo "${{ secrets.GITEE_SYNC_ACCESSS_KEY }}" > "$SSHPATH/id_rsa"
+          chmod 600 "$SSHPATH/id_rsa"
           git remote add upstream "git@gitee.com:Sipeed/maixpy_scripts.git"
           git push upstream master:master --force
 
