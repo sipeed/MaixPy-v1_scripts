@@ -27,6 +27,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: sync shell cmd
         run: |
+          git fetch --unshallow
           SSHPATH="$HOME/.ssh"
           rm -rf "$SSHPATH"
           mkdir -p "$SSHPATH"
