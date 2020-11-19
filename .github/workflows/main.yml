@@ -4,11 +4,12 @@ name: sync code to gitee
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+on: [push, pull_request]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,14 +28,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: sync shell cmd
         run: |
+          GITEE_GIT_ADDR="git@gitee.com:Sipeed/maixpy_scripts.git"
           git fetch --unshallow
           SSHPATH="$HOME/.ssh"
           rm -rf "$SSHPATH"
           mkdir -p "$SSHPATH"
           echo "${{ secrets.GITEE_SYNC_ACCESSS_KEY }}" > "$SSHPATH/id_rsa"
           chmod 600 "$SSHPATH/id_rsa"
-          ls -al "$SSHPATH/id_rsa"
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
-          git remote add upstream "git@gitee.com:Sipeed/maixpy_scripts.git"
-          git push upstream master:master --force --tags
+          git remote add upstream $GITEE_GIT_ADDR
+          git push upstream --all --force
 
