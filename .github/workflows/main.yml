@@ -33,6 +33,7 @@ jobs:
           echo "${{ secrets.GITEE_SYNC_ACCESSS_KEY }}" > "$SSHPATH/id_rsa"
           chmod 600 "$SSHPATH/id_rsa"
           ls -al "$SSHPATH/id_rsa"
+          sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
           git remote add upstream "git@gitee.com:Sipeed/maixpy_scripts.git"
           git push upstream master:master --force --tags
 
