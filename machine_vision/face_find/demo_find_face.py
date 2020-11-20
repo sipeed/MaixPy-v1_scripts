@@ -3,6 +3,14 @@ import sensor, image, lcd, time
 import KPU as kpu
 import gc, sys
 
+def lcd_show_except(e):
+    import uio
+    err_str = uio.StringIO()
+    sys.print_exception(e, err_str)
+    err_str = err_str.getvalue()
+    img = image.Image(size=(224,224))
+    img.draw_string(0, 10, err_str, scale=1, color=(0xff,0x00,0x00))
+    lcd.display(img)
 
 def main(model_addr=0x300000, lcd_rotation=0, sensor_hmirror=False, sensor_vflip=False):
     sensor.reset()
@@ -31,7 +39,7 @@ def main(model_addr=0x300000, lcd_rotation=0, sensor_hmirror=False, sensor_vflip
             img.draw_string(0, 200, "t:%dms" %(t), scale=2)
             lcd.display(img)
     except Exception as e:
-        sys.print_exception(e)
+        raise e
     finally:
         kpu.deinit(task)
 
@@ -42,5 +50,6 @@ if __name__ == "__main__":
         # main(model_addr="/sd/m.kmodel")
     except Exception as e:
         sys.print_exception(e)
+        lcd_show_except(e)
     finally:
         gc.collect()
