@@ -1,25 +1,3 @@
-import network, time
-from machine import UART
-from Maix import GPIO
-from fpioa_manager import fm
-from board import board_info
-# En SEP8285
-fm.register(8, fm.fpioa.GPIOHS0, force=True)
-wifi_en=GPIO(GPIO.GPIOHS0, GPIO.OUT)
-
-# for new MaixGO board, if not, remove it
-fm.register(0, fm.fpioa.GPIOHS1, force=True)
-wifi_io0_en=GPIO(GPIO.GPIOHS1, GPIO.OUT)
-wifi_io0_en.value(0)
-
-fm.register(board_info.WIFI_RX, fm.fpioa.UART2_TX, force=True)
-fm.register(board_info.WIFI_TX, fm.fpioa.UART2_RX, force=True)
-
-uart = UART(UART.UART2,115200,timeout=1000, read_buf_len=4096)
-
-def wifi_enable(en):
-    global wifi_en
-    wifi_en.value(en)
 
 def wifi_deal_ap_info(info):
     res = []
