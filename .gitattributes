@@ -4,3 +4,4 @@
 *.md linguist-language=python
 *.yml linguist-language=python
 *.py linguist-language=python
+*.c linguist-language=python
