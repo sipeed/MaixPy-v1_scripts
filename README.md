@@ -18,8 +18,6 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | modules   | external modules |
 | multimedia | normal multimedia processing, audio video game etc. |
 | network | network related |
-| tools_on_PC | some tools for maxipy running on PC, not for maixpy |
-
 
 ## 目录结构
 
@@ -33,6 +31,4 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | modules   | 外部外设模块使用, 比如 Grove 模块, sp-mod 模块 |
 | multimedia | 普通的多媒体功能,比如音频、视频、GUI、游戏等 |
 | network | 网络相关例程 |
-| tools_on_PC | 在电脑端使用的工具,注意不能在 maixpy 上运行 |
-
 
