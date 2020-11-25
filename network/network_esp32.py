@@ -60,11 +60,11 @@ class wifi():
         return False
 
 if __name__ == "__main__":
-    # It is recommended to callas a class library (upload network_esp8285.py)
+    # It is recommended to callas a class library (upload network_espat.py)
 
     # from network_esp32 import wifi
     SSID = "Sipeed_2.4G"
-    PASW = "XXXXXXXXX"
+    PASW = "xxxxxxxx"
 
     def check_wifi_net(reply=5):
         if wifi.isconnected() != True:
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                         break
                 except Exception as e:
                     print(e)
-        return wifi.isconnected()
+        return wifi.isconnected()network_espw5k
 
     if wifi.isconnected() == False:
         check_wifi_net()

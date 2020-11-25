@@ -2,7 +2,7 @@
 
 ######## AP config #########
 WIFI_SSID = "Sipeed_2.4G"
-WIFI_PASSWD = "Sipeed123."
+WIFI_PASSWD = "xxxxxxxx"
 ############################
 
 

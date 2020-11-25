@@ -5,6 +5,8 @@
 #   http://www.opensource.org/licenses/mit-license.php
 #
 
+# from network_w5k import wlan
+
 SSID = "Sipeed_2.4G"
 PASW = "xxxxxxxx"
 
@@ -46,47 +48,28 @@ def enable_espat():
 
 # from network_w5k import wlan
 
-try:
-    import usocket as socket
-except:
-    import socket
+import socket
 
-TestHttps = False
+ADDR = ("192.168.0.107", 60000)
 
-def main(use_stream=True):
-    s = socket.socket()
-    s.settimeout(1)
-    host = "www.baidu.com"
-    if TestHttps:
-        ai = socket.getaddrinfo(host, 443)
-    else:
-        ai = socket.getaddrinfo(host, 80)
-    print("Address infos:", ai)
-    addr = ai[0][-1]
-    for i in range(5):
-        try:
-            print("Connect address:", addr)
-            s.connect(addr)
+sock = socket.socket()
+sock.connect(ADDR)
 
-            if TestHttps: # ssl
-                try:
-                    import ussl as ssl
-                except:
-                    import ssl
-                tmp = ssl.wrapsocket(s, server_hostname=host)
-                tmp.write(b"GET / HTTP/1.1\r\n\r\n")
-            else:
-                s.write(b"GET / HTTP/1.1\r\n\r\n")
-            data = (s.readline('\r\n'))
-            print(data)
-            with open('test.txt', 'wb') as f:
-                f.write(data)
+sock.settimeout(1)
+while 1:
+    sock.send("hello\n")
+    #data = sock.recv(10) # old maxipy have bug (recv timeout no return last data)
+    #print(data) # fix
+    try:
+      data = b""
+      while True:
+        tmp = sock.recv(1)
+        print(tmp)
+        if len(tmp) == 0:
+            raise Exception('timeout or disconnected')
+        data += tmp
+    except Exception as e:
+      print("rcv:", len(data), data)
+    #time.sleep(2)
 
-        except Exception as e:
-          print(e)
-
-    s.close()
-
-main()
-
-
+sock.close()

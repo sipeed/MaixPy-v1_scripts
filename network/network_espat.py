@@ -34,7 +34,7 @@ class wifi():
     def enable(en):
         __class__.en.value(en)
 
-    def at_cmd(cmd="AT\r\n", resp="OK\r\n", timeout=20):
+    def _at_cmd(cmd="AT\r\n", resp="OK\r\n", timeout=20):
         __class__.uart.write(cmd) # "AT+GMR\r\n"
         time.sleep_ms(timeout)
         tmp = __class__.uart.read()
@@ -42,6 +42,12 @@ class wifi():
         if tmp and tmp.endswith(resp):
             return True
         return False
+
+    def at_cmd(cmd="AT\r\n", timeout=20):
+        __class__.uart.write(cmd) # "AT+GMR\r\n"
+        time.sleep_ms(timeout)
+        tmp = __class__.uart.read()
+        return tmp
 
     def reset(force=False, reply=5):
         if force == False and __class__.isconnected():
@@ -53,13 +59,13 @@ class wifi():
             time.sleep_ms(50)
             __class__.enable(True)
             time.sleep_ms(500) # at start > 500ms
-            if __class__.at_cmd(timeout=500):
+            if __class__._at_cmd(timeout=500):
                 break
-        __class__.at_cmd()
-        __class__.at_cmd('AT+UART_CUR=921600,8,1,0,0\r\n', "OK\r\n")
+        __class__._at_cmd()
+        __class__._at_cmd('AT+UART_CUR=921600,8,1,0,0\r\n', "OK\r\n")
         __class__.uart = UART(UART.UART2, 921600, timeout=1000, read_buf_len=10240)
         # important! baudrate too low or read_buf_len too small will loose data
-        #print(__class__.at_cmd())
+        #print(__class__._at_cmd())
         try:
             __class__.nic = network.ESP8285(__class__.uart)
             time.sleep_ms(500) # wait at ready to connect
@@ -82,18 +88,18 @@ class wifi():
         return False
 
 if __name__ == "__main__":
-    # It is recommended to callas a class library (upload network_esp8285.py) 
+    # It is recommended to callas a class library (upload network_espat.py) 
 
-    # from network_esp8285 import wifi
+    # from network_espat import wifi
     SSID = "Sipeed_2.4G"
-    PASW = "XXXXXXXXX"
+    PASW = "xxxxxxxx"
 
     def check_wifi_net(reply=5):
         if wifi.isconnected() != True:
             for i in range(reply):
                 try:
                     wifi.reset()
-                    print('try AT connect wifi...', wifi.at_cmd())
+                    print('try AT connect wifi...', wifi._at_cmd())
                     wifi.connect(SSID, PASW)
                     if wifi.isconnected():
                         break

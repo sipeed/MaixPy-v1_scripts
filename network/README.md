@@ -1,15 +1,51 @@
+# Usage
 
+## network
 
+- [network_esp32.py](./network_esp32.py)
+- [network_espat.py](./network_espat.py)
+- [network_espw5k.py](./network_espw5k.py)
 
-## Use ESP32 as WiFi module
+> 使用 MaixPy IDE 的菜单功能【发送文件到板子】即可作为一个类库使用。
 
-* Download latest firmware of esp32 [here](https://github.com/sipeed/Maixduino_esp32_fimware/releases)
-* Upload firmware to ESP32 by [esptool](https://github.com/espressif/esptool) or other burn tools, e.g.
+Use the MaixPy IDE's menu functionality [send files to the board] as a class library.
+
+```python
+from network_esp32 import wifi
+
+from network_espat import wifi
+
+from network_w5k import wlan
 ```
-pip install esptool
-esptool.py --chip esp32 --port /dev/ttyUSB1 erase_flash
-esptool.py --chip esp32 --port /dev/ttyUSB1 --baud 1500000 write_flash -z 0x0000 maixduino_esp32_firmware_v1.4.0.bin
-```
 
-* Then try demo
+## example
 
+> 使用网卡连接到网络后才能进行以下操作。
+
+Using the network card to connect to the network to make the following operation.
+
+- [demo_esp32_ap_scan.py](./demo_esp32_ap_scan.py)
+- [demo_esp32_ping.py](./demo_esp32_ping.py)
+
+- [demo_espat_ap_scan.py](./demo_espat_ap_scan.py)
+
+- [demo_socket_tcp_client.py](./demo_socket_tcp_client.py)
+- [demo_socket_tcp_server.py](./demo_socket_tcp_server.py)
+
+- [demo_socket_udp_client.py](./demo_socket_udp_client.py)
+- [demo_socket_udp_server.py](./demo_socket_udp_server.py)
+
+- [demo_socket_mqtt.py](./demo_socket_mqtt.py)
+
+- [demo_http_get_jpg.py](./demo_http_get_jpg.py)
+- [demo_socket_https.py](./demo_socket_https.py)
+
+- [demo_socket_send_pic.py](./demo_socket_send_pic.py)
+- [demo_socket_pic_server.py](./demo_socket_pic_server.py)
+
+## other
+
+- [demo_espat_ap_test.py](./demo_espat_ap_test.py)
+- [espat_upgrade.py](./espat_upgrade.py)
+
+- [demo_esp32_read_adc.py](./demo_esp32_read_adc.py)

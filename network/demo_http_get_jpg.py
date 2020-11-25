@@ -1,64 +1,61 @@
-import usocket, network, time
-import lcd, image
-from Maix import GPIO
-from machine import UART
-from fpioa_manager import fm
-from board import board_info
+
+# This file is part of MaixPY
+# Copyright (c) sipeed.com
+#
+# Licensed under the MIT license:
+#   http://www.opensource.org/licenses/mit-license.php
+#
+
+SSID = "Sipeed_2.4G"
+PASW = "xxxxxxxx"
+
+
+def enable_esp32():
+    from network_esp32 import wifi
+    if wifi.isconnected() == False:
+        for i in range(5):
+            try:
+                # Running within 3 seconds of power-up can cause an SD load error
+                # wifi.reset(is_hard=False)
+                wifi.reset(is_hard=True)
+                print('try AT connect wifi...')
+                wifi.connect(SSID, PASW)
+                if wifi.isconnected():
+                    break
+            except Exception as e:
+                print(e)
+    print('network state:', wifi.isconnected(), wifi.ifconfig())
+
+
+enable_esp32()
+
+
+def enable_espat():
+    from network_espat import wifi
+    if wifi.isconnected() == False:
+        for i in range(5):
+            try:
+                # Running within 3 seconds of power-up can cause an SD load error
+                # wifi.reset(is_hard=False)
+                wifi.reset()
+                print('try AT connect wifi...')
+                wifi.connect(SSID, PASW)
+                if wifi.isconnected():
+                    break
+            except Exception as e:
+                print(e)
+    print('network state:', wifi.isconnected(), wifi.ifconfig())
+
+#enable_espat()
+
+# from network_w5k import wlan
+
 
 try:
-    import usocket as _socket
+    import usocket as socket
 except:
-    import _socket
-try:
-    import ussl as ssl
-except:
-    import ssl
+    import socket
 
-
-# for new MaixGO board, if not, remove it
-fm.register(0, fm.fpioa.GPIOHS1, force=True)
-wifi_io0_en=GPIO(GPIO.GPIOHS1, GPIO.OUT)
-wifi_io0_en.value(0)
-
-# En SEP8285
-fm.register(8, fm.fpioa.GPIOHS0, force=True)
-wifi_en=GPIO(GPIO.GPIOHS0,GPIO.OUT)
-fm.register(board_info.WIFI_RX,fm.fpioa.UART2_TX, force=True)
-fm.register(board_info.WIFI_TX,fm.fpioa.UART2_RX, force=True)
-
-def wifi_enable(en):
-    global wifi_en
-    wifi_en.value(en)
-
-def wifi_reset():
-    global uart
-    wifi_enable(0)
-    time.sleep_ms(200)
-    wifi_enable(1)
-    time.sleep(2)
-    uart = UART(UART.UART2,115200,timeout=1000, read_buf_len=4096)
-    tmp = uart.read()
-    uart.write("AT+UART_CUR=921600,8,1,0,0\r\n")
-    print(uart.read())
-    uart = UART(UART.UART2,921600,timeout=1000, read_buf_len=10240) # important! baudrate too low or read_buf_len too small will loose data
-    uart.write("AT\r\n")
-    tmp = uart.read()
-    print(tmp)
-    if not tmp.endswith("OK\r\n"):
-        print("reset fail")
-        return None
-    try:
-        nic = network.ESP8285(uart)
-    except Exception:
-        return None
-    return nic
-
-nic = wifi_reset()
-if not nic:
-    raise Exception("WiFi init fail")
-
-nic.connect("Sipeed_2.4G", "passwd")
-nic.ifconfig()
 
 class Response:
 
@@ -116,14 +113,14 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
             host, port = host.split(":", 1)
             port = int(port)
 
-        ai = usocket.getaddrinfo(host, port, 0, usocket.SOCK_STREAM)
+        ai = socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM)
         ai = ai[0]
 
         resp_d = None
         if parse_headers is not False:
             resp_d = {}
 
-        s = usocket.socket(ai[0], ai[1], ai[2])
+        s = socket.socket(ai[0], ai[1], ai[2])
         try:
             s.connect(ai[-1])
             if proto == "https:":
@@ -196,40 +193,83 @@ def request(method, url, data=None, json=None, headers={}, stream=None, parse_he
 def head(url, **kw):
     return request("HEAD", url, **kw)
 
+
 def get(url, **kw):
     return request("GET", url, **kw)
+
 
 def post(url, **kw):
     return request("POST", url, **kw)
 
+
 def put(url, **kw):
     return request("PUT", url, **kw)
+
 
 def patch(url, **kw):
     return request("PATCH", url, **kw)
 
+
 def delete(url, **kw):
     return request("DELETE", url, **kw)
 
-headers ={
+
+headers = {
     "User-Agent": "MaixPy"
 }
 
 res = get("http://static.sipeed.com/example/MaixPy.jpg", headers=headers)
 print("response:", res.status_code)
 content = res.content
-print("get img, length:{}, should be:{}".format(len(content), int(res.headers['Content-Length'])))
+print("get img, length:{}, should be:{}".format(
+    len(content), int(res.headers['Content-Length'])))
 
-if len(content)!= int(res.headers['Content-Length']):
+if len(content) != int(res.headers['Content-Length']):
     print("download img fail, not complete, try again")
 else:
     print("save to /flash/MaixPy.jpg")
-    f = open("/flash/MaixPy.jpg","wb")
+    f = open("/flash/MaixPy.jpg", "wb")
     f.write(content)
     f.close()
     del content
     print("save ok")
     print("display")
+    import lcd
+    import image
     img = image.Image("/flash/MaixPy.jpg")
     lcd.init()
     lcd.display(img)
+
+'''
+MicroPython v0.5.1-136-g039f72b6c-dirty on 2020-11-18; Sipeed_M1 with kendryte-k210
+Type "help()" for more information.
+>>> network state: True ('192.168.0.143', '255.255.255.0', '192.168.0.1', '0', '0', 'b0:b9:8a:5b:be:7f', 'Sipeed_2.4G')
+
+Traceback (most recent call last):
+  File "<stdin>", line 220, in <module>
+  File "<stdin>", line 197, in get
+  File "<stdin>", line 179, in request
+  File "<stdin>", line 124, in request
+OSError: -1
+MicroPython v0.5.1-136-g039f72b6c-dirty on 2020-11-18; Sipeed_M1 with kendryte-k210
+Type "help()" for more information.
+>>> network state: True ('192.168.0.143', '255.255.255.0', '192.168.0.1', '0', '0', 'b0:b9:8a:5b:be:7f', 'Sipeed_2.4G')
+[MaixPy] get_host_byname | get_host_byname failed
+
+Traceback (most recent call last):
+  File "<stdin>", line 220, in <module>
+  File "<stdin>", line 197, in get
+  File "<stdin>", line 115, in request
+OSError: [Errno 22] EINVAL
+MicroPython v0.5.1-136-g039f72b6c-dirty on 2020-11-18; Sipeed_M1 with kendryte-k210
+Type "help()" for more information.
+>>> network state: True ('192.168.0.143', '255.255.255.0', '192.168.0.1', '0', '0', 'b0:b9:8a:5b:be:7f', 'Sipeed_2.4G')
+response: 200
+get img, length:50611, should be:50611
+save to /flash/MaixPy.jpg
+save ok
+display
+MicroPython v0.5.1-136-g039f72b6c-dirty on 2020-11-18; Sipeed_M1 with kendryte-k210
+Type "help()" for more information.
+>>> 
+'''

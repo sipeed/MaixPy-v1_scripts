@@ -13,28 +13,28 @@
 
 ## pic_server.py
 
-局域网图传 server 端
+LAN map transmission server 
 
-- 安装依赖
+- Installation dependency
 
-更新 pip
+update pip
 
 ```shell
 # python -m pip install --upgrade pip
-python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple # 国内清华源，加速下载安装
+python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple # Domestic Tsinghua source
 ```
 
-安装 pygame
+update pygame
 
 ```shell
 # pip3 install pygame
-pip3 install pygame -i https://pypi.tuna.tsinghua.edu.cn/simple # 国内清华源，加速下载安装
+pip3 install pygame -i https://pypi.tuna.tsinghua.edu.cn/simple # Domestic Tsinghua source
 ```
 
-- 运行 server 端
+- run server
 
 ```shell
-python3 pic_serve.py
+python3 demo_socket_pic_server.py
 ```
 '''
 
