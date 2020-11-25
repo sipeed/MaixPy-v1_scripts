@@ -1,14 +1,3 @@
-from machine import SPI
-
-spi1 = SPI(SPI.SPI1, mode=SPI.MODE_MASTER, baudrate=10000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=28, mosi=29, miso=30)
-w = b'1234'
-r = bytearray(4)
-spi1.write(w)
-spi1.write_readinto(w, r)
-spi1.read(5, write=0x00)
-spi1.readinto(r, write=0x00)
-
-'''
 import time
 from machine import SPI
 from fpioa_manager import fm
@@ -32,4 +21,14 @@ while True:
   cs.value(1)
   print(w, r)
   time.sleep(0.1)
+
+'''
+from machine import SPI
+spi1 = SPI(SPI.SPI1, mode=SPI.MODE_MASTER, baudrate=10000000, polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=28, mosi=29, miso=30)
+w = b'1234'
+r = bytearray(4)
+spi1.write(w)
+spi1.write_readinto(w, r)
+spi1.read(5, write=0x00)
+spi1.readinto(r, write=0x00)
 '''

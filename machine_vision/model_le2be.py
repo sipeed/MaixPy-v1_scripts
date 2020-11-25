@@ -1,3 +1,11 @@
+#################################
+# model_le2be.py
+# 
+# run python3 on pc not maixpy
+#
+# not maixpy !!!!!!!!
+#################################
+
 import struct
 import sys
 import os

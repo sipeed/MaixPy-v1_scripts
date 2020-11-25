@@ -21,3 +21,4 @@ while True:
     work_data = id_buf
     cs.value(1)
     print(work_data)
+    
