@@ -3,3 +3,4 @@
 *.html linguist-language=python
 *.md linguist-language=python
 *.yml linguist-language=python
+*.py linguist-language=python
