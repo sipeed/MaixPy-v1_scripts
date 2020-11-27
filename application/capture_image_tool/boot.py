@@ -28,7 +28,7 @@ import time
 import image
 
 #### image size ####
-set_windowing = (224, 224)        # 320x240 if None
+set_windowing = (240, 240)        # 320x240 if None
 
 #### sensor config ####
 
@@ -49,6 +49,8 @@ if set_windowing:
 # sensor.set_hmirror(True)        # image horizonal mirror
 # sensor.set_vflip(True)          # image vertical flip
 # sensor.set_auto_whitebal(False)
+
+sensor.skip_frames()
 
 #### lcd config ####
 lcd.init(type=1, freq=15000000)
