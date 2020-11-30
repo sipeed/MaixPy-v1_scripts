@@ -6,7 +6,6 @@ import socket
 import sys
 import time
 
-
 def start_tcp_server(ip, port):
     #create socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
