@@ -6,7 +6,24 @@
 #
 
 # Uasge see readme.md
-from network_esp32 import wifi
+# from network_esp32 import wifi
+
+import time, network
+from Maix import GPIO
+from fpioa_manager import fm
+
+class wifi():
+    # IO map for ESP32 on Maixduino
+    fm.register(25,fm.fpioa.GPIOHS10)#cs
+    fm.register(8,fm.fpioa.GPIOHS11)#rst
+    fm.register(9,fm.fpioa.GPIOHS12)#rdy
+    print("Use Hareware SPI for other maixduino")
+    fm.register(28,fm.fpioa.SPI1_D0, force=True)#mosi
+    fm.register(26,fm.fpioa.SPI1_D1, force=True)#miso
+    fm.register(27,fm.fpioa.SPI1_SCLK, force=True)#sclk
+    nic = network.ESP32_SPI(cs=fm.fpioa.GPIOHS10, rst=fm.fpioa.GPIOHS11, rdy=fm.fpioa.GPIOHS12, spi=1)
+
+print("ESP32_SPI firmware version:", wifi.nic.version())
 
 # get ADC0 ADC1 ADC2
 adc = wifi.nic.adc((0,1,2))
@@ -26,7 +43,7 @@ while True:
 '''
     MicroPython v0.5.1-136-g039f72b6c-dirty on 2020-11-18; Sipeed_M1 with kendryte-k210
     Type "help()" for more information.
-    >>> 
+    >>>
     raw REPL; CTRL-B to exit
     >OK
     (2370, 3102, 3071)
