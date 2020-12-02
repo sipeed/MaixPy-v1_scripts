@@ -23,3 +23,14 @@ try:
     nes.loop() # run
 finally:
   nes.free()
+
+'''python
+try:
+  nes.init(nes.INPUT) # input
+  nes.load("mario.nes") # load
+  while True:
+    nes.loop() # run
+finally:
+  nes.free() # exit
+'''
+  
