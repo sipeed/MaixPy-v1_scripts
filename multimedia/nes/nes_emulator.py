@@ -1,19 +1,25 @@
 import nes, lcd
-from Maix import GPIO
-from fpioa_manager import fm
-
-# AUDIO_PA_EN_PIN = None  # Bit Dock and old MaixGo
-AUDIO_PA_EN_PIN = 32      # Maix Go(version 2.20)
-# AUDIO_PA_EN_PIN = 2     # Maixduino
-
-# open audio PA
-if AUDIO_PA_EN_PIN:
-    fm.register(AUDIO_PA_EN_PIN, fm.fpioa.GPIO1, force=True)
-    wifi_en=GPIO(GPIO.GPIO1, GPIO.OUT)
-    wifi_en.value(1)
-
 
 lcd.init(freq=15000000)
-nes.init(nes.KEYBOARD)
-nes.run("/sd/mario.nes")
 
+# B A SEL START UP DOWN LEFT RIGHT
+# 1 2 4   8     16  32   64   128
+# nes.input(8, 0, 0) # press START
+# nes.input(1P, 2P, SYS)
+
+try:
+  nes.init(nes.INPUT)
+  nes.load("mario.nes")
+  # nes.run("/sd/mario.nes")
+  for i in range(20000): # wait
+    nes.loop()
+  for i in range(500):
+    nes.loop()
+    nes.input(8, 0, 0) # input enter
+    nes.loop()
+    nes.input(0, 0, 0)
+    nes.loop()
+  while True:
+    nes.loop() # run
+finally:
+  nes.free()
