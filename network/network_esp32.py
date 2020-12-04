@@ -75,7 +75,7 @@ if __name__ == "__main__":
                         break
                 except Exception as e:
                     print(e)
-        return wifi.isconnected()network_espw5k
+        return wifi.isconnected()
 
     if wifi.isconnected() == False:
         check_wifi_net()
