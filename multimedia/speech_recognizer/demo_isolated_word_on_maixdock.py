@@ -87,7 +87,7 @@ while True:
     img.draw_string(20, 80, "Please speak A or B or C", color=(255, 0, 0), scale=2, mono_space=0)
     lcd.display(img)
     print(sr.state())
-    print(sr.dts(data))
+    print(sr.dtw(data))
     if sr.Done == sr.recognize():
         res = sr.result()
         if res != None:
