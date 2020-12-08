@@ -60,8 +60,8 @@ class DS18X20:
         return tuple(temp)
 
 
-ds18b20_2 = DS18X20(fm.register(board_info.PIN2, self.fpioa.GPIOHS2, force=True))
-rom_2 = ds18b20_2.scan()
+fm.register(14, fm.fpioa.GPIOHS2, force=True)
+ds18b20_2 = DS18X20(fm.fpioa.GPIOHS2)
 while True:
     print(ds18b20_2.read_temp(rom_2))
     time.sleep_ms(100)
