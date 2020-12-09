@@ -1,4 +1,4 @@
-MaixPy Scripts
+[MaixPy Scripts](https://github.com/sipeed/MaixPy_scripts)
 ====
 
 
@@ -18,6 +18,16 @@ Doc of MaixPy: [maixpy.sipeed.com](https://maixpy.sipeed.com)
 | modules   | external modules |
 | multimedia | normal multimedia processing, audio video game etc. |
 | network | network related |
+
+-------------------------------
+
+运行在 [MaixPy](https://github.com/sipeed/MaixPy) 上的脚本，玩得开心～
+
+MaixPy 文档: [maixpy.sipeed.com](https://maixpy.sipeed.com)
+
+另外，国内也可以在[gitee](https://gitee.com/Sipeed/maixpy_scripts)上查看，会实时同步, 对脚本有疑问请到[github](https://github.com/sipeed/MaixPy_scripts/issues)搜索问题或者提问， MaixPy 固件相关问题请到[MaixPy issue](https://github.com/sipeed/MaixPy_scripts/issues)提问
+
+
 
 ## 目录结构
 
