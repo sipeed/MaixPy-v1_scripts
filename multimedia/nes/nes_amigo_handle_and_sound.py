@@ -29,7 +29,7 @@ state = 0
 
 try:
   nes.init(nes.INPUT)
-  nes.load("mario.nes")
+  nes.load("sd/game/mario.nes")
   for i in range(20000):
     nes.loop()
   for i in range(500):
