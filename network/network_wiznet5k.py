@@ -1,0 +1,59 @@
+import network, socket, time
+from machine import SPI
+from Maix import GPIO
+from fpioa_manager import fm
+
+################ config ################
+server_ip      = "192.168.0.141"
+server_port    = 8000
+
+SPI_SCK = 21
+SPI_MOSI = 8
+SPI_MISO = 15
+SPI_CS = 20
+#######################################
+
+addr = (server_ip, server_port)
+spi1 = SPI(4, mode=SPI.MODE_MASTER, baudrate=600 * 1000,
+            polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=SPI_SCK, mosi=SPI_MOSI, miso = SPI_MISO)
+
+nic = network.WIZNET5K(spi = spi1, cs = SPI_CS)
+print("Static IP: ", nic.ifconfig())
+
+# #dhcp: Dynamic IP acquisition, It's not necessary
+# while True:
+#     if(nic.dhclient()):
+#         print("DHCP:", nic.ifconfig() )
+#         break;
+
+############################## TCP Test ##############################
+# The TCP server needs to be pre-started
+sock = socket.socket()
+sock.connect(addr)
+while 1:
+    sock.send("Client send: Hello TCP\n")
+    try:
+          data = sock.recv(10)
+          print("Recv from Server: ", data)
+    except Exception as e:
+          print(e)
+    time.sleep(500)
+sock.close()
+############################ TCP Test end ############################
+
+############################## UDP Test ##############################
+# # The server must first know the client's IP and port number through the message sent by the client before it send the message to the client
+# sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# sock.settimeout(5)
+
+# while True:
+#     sock.sendto("Client send: hello UDP\n".encode(),addr)
+#     try:
+#         data, addr1 = sock.recvfrom(10)
+#         print("Recv from server: ", data)
+#     except Exception as e:
+#         pass
+#     time.sleep_ms(500)
+# sock.close()
+############################ UDP Test end ############################
+    
