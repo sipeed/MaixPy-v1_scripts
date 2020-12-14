@@ -124,7 +124,6 @@ class SPWEATHER:
 
     def read_raw_data(self, result):
         """ Reads the raw (uncompensated) data from the sensor.
-
             Args:
                 result: array of length 3 or alike where the result will be
                 stored, in temperature, pressure, humidity order
@@ -160,12 +159,10 @@ class SPWEATHER:
 
     def read_compensated_data(self, result=None):
         """ Reads the data from the sensor and returns the compensated data.
-
             Args:
                 result: array of length 3 or alike where the result will be
                 stored, in temperature, pressure, humidity order. You may use
                 this to read out the sensor without allocating heap memory
-
             Returns:
                 array with temperature, pressure, humidity. Will be the one from
                 the result parameter if not None
@@ -238,7 +235,14 @@ if __name__ == "__main__":
     from machine import I2C
     import time
 
-    i2c_bus = I2C(I2C.I2C0, freq=100*1000, scl=6, sda=7)
+    ############# config #############
+    WEATHER_I2C_NUM = I2C.I2C0
+    WEATHER_I2C_FREQ_KHZ = 100
+    WEATHER_I2C_SCL = 6
+    WEATHER_I2C_SDA = 7
+    ##################################
+    
+    i2c_bus = I2C(WEATHER_I2C_NUM, freq=WEATHER_I2C_FREQ_KHZ*1000, scl=WEATHER_I2C_SCL, sda=WEATHER_I2C_SDA)
     i2c_devs_list = i2c_bus.scan()
     print("I2C devices:" + str(i2c_devs_list))
 
