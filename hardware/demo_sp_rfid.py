@@ -114,7 +114,7 @@ class MFRC522:
     def MFRC522_Reset(self):
         for i in range(0x30):
             val = self.Read_MFRC522(i)
-            print("val: [0x{} -> 0x{}]\r\n".format(hex(i), hex(val)))
+            # print("val: [0x{} -> 0x{}]\r\n".format(hex(i), hex(val)))
 
         self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
 
