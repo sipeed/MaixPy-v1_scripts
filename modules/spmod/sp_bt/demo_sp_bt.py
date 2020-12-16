@@ -21,10 +21,14 @@ def set_name(uart, name):
                 break
 
 if __name__ == "__main__":
-    # set uart rx/tx func to io_6/7
-    fm.register(7, fm.fpioa.UART1_TX)
-    fm.register(6, fm.fpioa.UART1_RX)
+############# config ###############
+    TX = 7
+    RX = 6
+###################################
 
+    # set uart rx/tx func to io_6/7
+    fm.register(TX, fm.fpioa.UART1_TX)
+    fm.register(RX, fm.fpioa.UART1_RX)
     # init uart
     uart = UART(UART.UART1, 9600, 8, 1, 0, timeout=1000, read_buf_len=4096)
 
