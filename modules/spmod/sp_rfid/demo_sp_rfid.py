@@ -1,4 +1,4 @@
-# DATE: 2020-12-18
+# DATE: 2020-12-18.1
 from Maix import GPIO
 from fpioa_manager import fm
 from machine import SPI
@@ -112,9 +112,12 @@ class MFRC522:
         self.MFRC522_Init()
 
     def MFRC522_Reset(self):
-        for i in range(0x30):
-            val = self.Read_MFRC522(i)
-            # print("val: [0x{} -> 0x{}]\r\n".format(hex(i), hex(val)))
+        # 打印所有寄存器的值
+        # for i in range(0x30):
+        #     val = self.Read_MFRC522(i)
+        #     print("val: [{} -> {}]\r\n".format(hex(i), hex(val)))
+        val = self.Read_MFRC522(self.VersionReg)
+        print("version: [{}]".format(hex(val)))
 
         self.Write_MFRC522(self.CommandReg, self.PCD_RESETPHASE)
 
