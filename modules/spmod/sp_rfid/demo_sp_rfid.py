@@ -1,4 +1,4 @@
-# DATE: 2020-12-3
+# DATE: 2020-12-18
 from Maix import GPIO
 from fpioa_manager import fm
 from machine import SPI
