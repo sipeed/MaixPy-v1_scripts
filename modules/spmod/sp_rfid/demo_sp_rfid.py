@@ -469,7 +469,7 @@ if __name__ == "__main__":
     # set gpiohs work mode to output mode
     cs = GPIO(GPIO.GPIOHS20, GPIO.OUT)
 
-    spi1 = SPI(SPI.SPI1, mode=SPI.MODE_MASTER, baudrate=SPI_FREQ_KHZ * 1000,
+    spi1 = SPI(SPI.SPI_SOFT, mode=SPI.MODE_MASTER, baudrate=SPI_FREQ_KHZ * 1000,
             polarity=0, phase=0, bits=8, firstbit=SPI.MSB, sck=SPI_SCK, mosi=SPI_MOSI, miso=SPI_MISO)
 
     # Create an object of the class MFRC522
