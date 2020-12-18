@@ -455,6 +455,7 @@ class MFRC522:
             print("unk ISO type\r\n")
 
 if __name__ == "__main__":
+    time.sleep(2)
     from micropython import const
     ################### config ###################
     CS_NUM = const(20)
