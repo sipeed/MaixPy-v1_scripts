@@ -51,7 +51,7 @@ try:
 except:
   pass
 with open('/flash/boot.py', 'wb') as f:
-  cfg_sensor = b'from machine import I2C\naxp173 = I2C(I2C.I2C0, freq=100000, scl=24, sda=27)\naxp173.writeto_mem(0x34, 0x27, 0x20)\naxp173.writeto_mem(0x34, 0x28, 0x0C)\naxp173.writeto_mem(0x34, 0x36, 0xCC, mem_size=8)'
+  cfg_sensor = b'import lcd\nlcd.clear((99, 99, 99))\nlcd.register(0xD1, 0x00)\nfrom machine import I2C\naxp173 = I2C(I2C.I2C0, freq=100000, scl=24, sda=27)\naxp173.writeto_mem(0x34, 0x27, 0x20)\naxp173.writeto_mem(0x34, 0x28, 0x0C)\naxp173.writeto_mem(0x34, 0x36, 0xCC, mem_size=8)'
   f.write(cfg_sensor)
   del cfg_sensor
 
@@ -66,3 +66,7 @@ except Exception as e:
     f.write(cfg)
   import machine
   machine.reset()
+
+import lcd
+lcd.clear((99, 99, 99))
+lcd.register(0xD1, 0x00)
