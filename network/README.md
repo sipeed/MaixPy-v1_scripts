@@ -30,10 +30,10 @@ Using the network card to connect to the network to make the following operation
 - [demo_espat_ap_scan.py](./demo_espat_ap_scan.py)
 
 - [demo_socket_tcp_client.py](./demo_socket_tcp_client.py)
-- (python3 not maixpy)[demo_socket_tcp_server.py](./demo_socket_tcp_server.py)
+- (use python3 not maixpy)[demo_socket_tcp_server.py](./demo_socket_tcp_server.py)
 
 - [demo_socket_udp_client.py](./demo_socket_udp_client.py)
-- (python3 not maixpy)[demo_socket_udp_server.py](./demo_socket_udp_server.py)
+- (use python3 not maixpy)[demo_socket_udp_server.py](./demo_socket_udp_server.py)
 
 - [demo_socket_mqtt.py](./demo_socket_mqtt.py)
 
