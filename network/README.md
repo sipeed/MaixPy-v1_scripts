@@ -15,7 +15,7 @@ from network_esp32 import wifi
 
 from network_espat import wifi
 
-from network_w5k import wlan
+from network_w5k import lan
 ```
 
 ## example
@@ -30,10 +30,10 @@ Using the network card to connect to the network to make the following operation
 - [demo_espat_ap_scan.py](./demo_espat_ap_scan.py)
 
 - [demo_socket_tcp_client.py](./demo_socket_tcp_client.py)
-- (use python3 not maixpy)[demo_socket_tcp_server.py](./demo_socket_tcp_server.py)
+- (run your pc python3 not maixpy)[demo_socket_tcp_server.py](./demo_socket_tcp_server.py)
 
 - [demo_socket_udp_client.py](./demo_socket_udp_client.py)
-- (use python3 not maixpy)[demo_socket_udp_server.py](./demo_socket_udp_server.py)
+- (run your pc python3 not maixpy)[demo_socket_udp_server.py](./demo_socket_udp_server.py)
 
 - [demo_socket_mqtt.py](./demo_socket_mqtt.py)
 
@@ -41,7 +41,7 @@ Using the network card to connect to the network to make the following operation
 - [demo_socket_https.py](./demo_socket_https.py)
 
 - [demo_socket_send_pic.py](./demo_socket_send_pic.py)
-- (python3 not maixpy)[demo_socket_pic_server.py](./demo_socket_pic_server.py)
+- (run your pc python3 not maixpy)[demo_socket_pic_server.py](./demo_socket_pic_server.py)
 
 ## other
 
