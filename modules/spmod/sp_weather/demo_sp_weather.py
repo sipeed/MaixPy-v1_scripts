@@ -43,7 +43,7 @@ class SPWEATHER:
                              bytearray([0x1d]))
         chip = self.i2c.readfrom_mem(self.qmc_address, 0x0d, 1)
         #print("chip id: " + str(chip))
-        print(hex(chip[0]))
+        print("chip id:", hex(chip[0]))
         if 0x31 == chip[0]:
             self.mag_chip_id = QMC6983_E1
         elif 0x32 == chip[0]:
@@ -60,7 +60,7 @@ class SPWEATHER:
                     self.mag_chip_id = QMC7983_Slope
         else:
             return
-        print(self.mag_chip_id)
+        print("mag_chip_id: ", self.mag_chip_id)
         self.i2c.writeto_mem(self.qmc_address, 0x21, bytearray([0x01]))
         self.i2c.writeto_mem(self.qmc_address, 0x20, bytearray([0x40]))
         if (self.mag_chip_id != QMC6983_A1_D1):
@@ -233,16 +233,19 @@ class SPWEATHER:
 ################## SP_WEATHER Demo ##################
 if __name__ == "__main__":
     from machine import I2C
+    from fpioa_manager import fm
     import time
 
     ############# config #############
-    WEATHER_I2C_NUM = I2C.I2C0
+    WEATHER_I2C_NUM = I2C.I2C_SOFT
     WEATHER_I2C_FREQ_KHZ = 100
-    WEATHER_I2C_SCL = 6
-    WEATHER_I2C_SDA = 7
+    WEATHER_I2C_SCL = 30
+    WEATHER_I2C_SDA = 31
     ##################################
     
-    i2c_bus = I2C(WEATHER_I2C_NUM, freq=WEATHER_I2C_FREQ_KHZ*1000, scl=WEATHER_I2C_SCL, sda=WEATHER_I2C_SDA)
+    i2c_bus = I2C(WEATHER_I2C_NUM, freq=WEATHER_I2C_FREQ_KHZ*1000, 
+    scl=WEATHER_I2C_SCL, sda=WEATHER_I2C_SDA, gscl = fm.fpioa.GPIOHS1,
+    gsda = fm.fpioa.GPIOHS2)
     i2c_devs_list = i2c_bus.scan()
     print("I2C devices:" + str(i2c_devs_list))
 
