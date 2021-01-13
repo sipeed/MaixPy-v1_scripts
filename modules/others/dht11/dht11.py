@@ -25,7 +25,7 @@ class DHT11Result:
 
 class DHT11:
 
-    def __init__(self, gpio):
+    def __init__(self, gpio = None):
         # '1DHT11 sensor reader class for MaixPy'
 
         if gpio != None:
@@ -216,7 +216,7 @@ if __name__ == "__main__":
     gpio = GPIO(GPIO.GPIOHS3, GPIO.OUT)
 
     # read data using gpio
-    instance = DHT11(gpio=None)
+    instance = DHT11(gpio)
 
     try:
         while True:
