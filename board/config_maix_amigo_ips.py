@@ -8,7 +8,7 @@ config = {
       "width": 480,
       "invert": 1,
       "dir": 40,
-      "lcd_type": 0
+      "lcd_type": 2
   },
   "sdcard":{
       "sclk":11,
@@ -66,8 +66,3 @@ except Exception as e:
     f.write(cfg)
   import machine
   machine.reset()
-
-import lcd
-lcd.clear((99, 99, 99))
-lcd.register(0xD1, 0x00)
-lcd.init()
