@@ -311,7 +311,7 @@ if __name__ == "__main__":
 
 	# io configure
 	fm.register(VL53L0X_SHT, fm.fpioa.GPIOHS0, force=True)
-	XSHUT = GPIO(GPIO.GPIOHS7, GPIO.OUT)
+	XSHUT = GPIO(GPIO.GPIOHS0, GPIO.OUT)
 	XSHUT.value(1)
 
 	# i2c init
