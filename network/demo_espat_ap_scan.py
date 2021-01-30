@@ -5,6 +5,11 @@
 #   http://www.opensource.org/licenses/mit-license.php
 #
 
+#from board import board_info
+#from Maix import config
+#tmp = config.get_value('board_info', None)
+#board_info.load(tmp)
+
 from network_espat import wifi
 wifi.reset()
 
