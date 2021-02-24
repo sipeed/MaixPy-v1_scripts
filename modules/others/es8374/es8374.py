@@ -669,7 +669,6 @@ class ES8374:
 1.测试 I2S 是否能够输出型号
 2.测试 ES8374 是否初始化成功
 3.测试 ES8374 是否配置正常
-
 -----------------------------'''
 
 if __name__ == "__main__":
@@ -695,8 +694,9 @@ if __name__ == "__main__":
     #fm.register(34,fm.fpioa.I2S0_OUT_D2, force=True)
 
     #i2c = I2C(I2C.I2C1, freq=100*1000) # , sda=31, scl=30
-    i2c = I2C(I2C.I2C3, freq=600*1000, sda=27, scl=24) # amigo
-
+    #i2c = I2C(I2C.I2C3, freq=600*1000, sda=27, scl=24) # amigo
+    i2c = I2C(I2C.I2C3, freq=600*1000, sda=31, scl=30, gscl=fm.fpioa.GPIOHS17, gsda=fm.fpioa.GPIOHS18) # cube
+    
     #fm.register(30,fm.fpioa.I2C1_SCLK, force=True)
     #fm.register(31,fm.fpioa.I2C1_SDA, force=True)
 
@@ -722,11 +722,19 @@ if __name__ == "__main__":
             # config i2s according to audio info # STANDARD_MODE LEFT_JUSTIFYING_MODE RIGHT_JUSTIFYING_MODE
             i2s.channel_config(I2S.CHANNEL_0, I2S.RECEIVER, resolution=I2S.RESOLUTION_16_BIT, cycles=I2S.SCLK_CYCLES_32, align_mode=I2S.STANDARD_MODE)
 
-            fm.register(13,fm.fpioa.I2S0_MCLK, force=True)
-            fm.register(21,fm.fpioa.I2S0_SCLK, force=True)
-            fm.register(18,fm.fpioa.I2S0_WS, force=True)
-            fm.register(35,fm.fpioa.I2S0_IN_D0, force=True)
-            fm.register(34,fm.fpioa.I2S0_OUT_D2, force=True)
+            # amigo
+            #fm.register(13,fm.fpioa.I2S0_MCLK, force=True)
+            #fm.register(21,fm.fpioa.I2S0_SCLK, force=True)
+            #fm.register(18,fm.fpioa.I2S0_WS, force=True)
+            #fm.register(35,fm.fpioa.I2S0_IN_D0, force=True)
+            #fm.register(34,fm.fpioa.I2S0_OUT_D2, force=True)
+            
+            # cube
+            fm.register(19,fm.fpioa.I2S0_MCLK, force=True)
+            fm.register(35,fm.fpioa.I2S0_SCLK, force=True)
+            fm.register(33,fm.fpioa.I2S0_WS, force=True)
+            fm.register(34,fm.fpioa.I2S0_IN_D0, force=True)
+            fm.register(18,fm.fpioa.I2S0_OUT_D2, force=True)
 
             i2s.set_sample_rate(22050)
 
@@ -758,19 +766,21 @@ if __name__ == "__main__":
             # config i2s according to audio info # STANDARD_MODE LEFT_JUSTIFYING_MODE RIGHT_JUSTIFYING_MODE
             i2s.channel_config(I2S.CHANNEL_2, I2S.TRANSMITTER, resolution=I2S.RESOLUTION_16_BIT, cycles=I2S.SCLK_CYCLES_32, align_mode=I2S.STANDARD_MODE)
 
-            #fm.register(19,fm.fpioa.I2S0_MCLK, force=True)
-            #fm.register(35,fm.fpioa.I2S0_SCLK, force=True)
-            #fm.register(33,fm.fpioa.I2S0_WS, force=True)
-            #fm.register(34,fm.fpioa.I2S0_IN_D0, force=True)
-            #fm.register(18,fm.fpioa.I2S0_OUT_D2, force=True)
+            # amigo
+            #fm.register(13,fm.fpioa.I2S0_MCLK, force=True)
+            #fm.register(21,fm.fpioa.I2S0_SCLK, force=True)
+            #fm.register(18,fm.fpioa.I2S0_WS, force=True)
+            #fm.register(35,fm.fpioa.I2S0_IN_D0, force=True)
+            #fm.register(34,fm.fpioa.I2S0_OUT_D2, force=True)
+            
+            # cube
+            fm.register(19,fm.fpioa.I2S0_MCLK, force=True)
+            fm.register(35,fm.fpioa.I2S0_SCLK, force=True)
+            fm.register(33,fm.fpioa.I2S0_WS, force=True)
+            fm.register(34,fm.fpioa.I2S0_IN_D0, force=True)
+            fm.register(18,fm.fpioa.I2S0_OUT_D2, force=True)
 
-            fm.register(13,fm.fpioa.I2S0_MCLK, force=True)
-            fm.register(21,fm.fpioa.I2S0_SCLK, force=True)
-            fm.register(18,fm.fpioa.I2S0_WS, force=True)
-            fm.register(35,fm.fpioa.I2S0_IN_D0, force=True)
-            fm.register(34,fm.fpioa.I2S0_OUT_D2, force=True)
-
-            for i in range(1):
+            for i in range(3):
 
                 time.sleep_ms(10)
 
@@ -820,5 +830,3 @@ if __name__ == "__main__":
 
         finally:
             pass
-
-
