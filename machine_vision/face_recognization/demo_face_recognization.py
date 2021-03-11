@@ -9,9 +9,9 @@ from fpioa_manager import fm
 from board import board_info
 import utime
 
-task_fd = kpu.load(0x200000)
-task_ld = kpu.load(0x300000)
-task_fe = kpu.load(0x400000)
+task_fd = kpu.load(0x300000)
+task_ld = kpu.load(0x400000)
+task_fe = kpu.load(0x500000)
 
 clock = time.clock()
 
