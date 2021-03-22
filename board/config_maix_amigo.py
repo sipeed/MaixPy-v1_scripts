@@ -47,22 +47,22 @@ print(cfg)
 
 # config sensor
 try:
-  os.remove('/flash/boot.py')
+  os.remove('boot.py')
 except:
   pass
-with open('/flash/boot.py', 'wb') as f:
+with open('boot.py', 'wb') as f:
   cfg_sensor = b'from machine import I2C\naxp173 = I2C(I2C.I2C0, freq=100000, scl=24, sda=27)\naxp173.writeto_mem(0x34, 0x27, 0x20)\naxp173.writeto_mem(0x34, 0x28, 0x0C)\naxp173.writeto_mem(0x34, 0x36, 0xCC, mem_size=8)'
   f.write(cfg_sensor)
   del cfg_sensor
 
 try:
-  with open('/flash/config.json', 'rb') as f:
+  with open('config.json', 'rb') as f:
     tmp = json.loads(f.read())
     print(tmp)
     if tmp["type"] != config["type"]:
       raise Exception('config.json no exist')
 except Exception as e:
-  with open('/flash/config.json', "w") as f:
+  with open('config.json', "w") as f:
     f.write(cfg)
   import machine
   machine.reset()
