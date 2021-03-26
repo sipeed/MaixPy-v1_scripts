@@ -12,15 +12,14 @@ fm.register(board_info.PIN13, fm.fpioa.UART2_RX, force=True)
 uart_A = UART(UART.UART1, 115200, 8, 0, 0, timeout=1000, read_buf_len=4096)
 uart_B = UART(UART.UART2, 115200, 8, 0, 0, timeout=1000, read_buf_len=4096)
 
-write_str = b'hello world'
+write_bytes = b'hello world'
 for i in range(20):
     uart_A.write(write_str)
     if uart_A.any():
         read_data = uart_B.read()
         if read_data:
-            read_str = read_data
-            print("string = ", read_str)
-            if read_str == write_str:
+            print("write_bytes = ", write_bytes)
+            if read_data == write_bytes:
                 print("baudrate:115200 bits:8 parity:0 stop:0 ---check Successfully")
 
 uart_A.deinit()
