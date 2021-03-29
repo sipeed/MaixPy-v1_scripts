@@ -69,7 +69,7 @@ if __name__ == "__main__":
             for i in range(reply):
                 try:
                     wifi.reset(is_hard=True)
-                    print('try AT connect wifi...')
+                    print('try esp32spi connect wifi...')
                     wifi.connect(SSID, PASW)
                     if wifi.isconnected():
                         break
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     esp32 set hard spi clk:9159090
 
     Get version fail
-    try AT connect wifi...
+    try esp32spi connect wifi...
     Use Hareware SPI for other maixduino
     [Warning] function is used by unknown(pin:10)
     [Warning] function is used by unknown(pin:6)
