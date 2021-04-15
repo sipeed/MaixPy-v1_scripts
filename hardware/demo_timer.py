@@ -1,4 +1,5 @@
 from machine import Timer
+import time
 
 def on_timer(timer):
     print("time up:",timer)
