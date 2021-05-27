@@ -25,8 +25,8 @@
 * 在 PC 上对 kmodel 模型文件进行预处理（对模型字节序进行翻转）
 
   ```shell
-  cd MaixPy_scripts/tools_on_PC/model_tools
-  python3 le2be.py your_kmodel_path.kmodel #进行预处理
+  cd MaixPy_scripts/machine_vision
+  python3 model_le2be.py your_kmodel_path.kmodel #进行预处理
   ```
 
   如果需要从 flash 中动态加载模型文件时必须，使用预处理之后的`_be.kmodel` 模型文件，该命令将生成以`_be.kmodel`(`be`表示`big edian`) 结尾的 kmodel

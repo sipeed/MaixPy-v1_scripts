@@ -22,8 +22,8 @@ Limitations:
 
 * Preprocess kmodel on PC
 ```
-cd MaixPy_scripts/tools_on_PC/model_tools
-python3 le2be.py your_kmodel_path.kmodel
+  cd MaixPy_scripts/machine_vision
+  python3 model_le2be.py your_kmodel_path.kmodel
 ```
 this command will generate a kmodel ends with `_be.kmodel`(`be` means `big edian`),
 you **MUST** use this model if you use `kpu.load_flash()` API
