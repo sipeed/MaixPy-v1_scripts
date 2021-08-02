@@ -28,7 +28,7 @@ import time
 import image
 
 #### image size ####
-set_windowing = (240, 240)        # 320x240 if None
+set_windowing = (224, 224)       
 
 #### sensor config ####
 
