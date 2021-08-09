@@ -21,9 +21,9 @@ while(True):
     if code:
         for i in code:
             a=img.draw_rectangle(i.rect())
+            img.draw_string(i.x(), i.y(), classes[i.classid()], color=(255, 0, 0), scale=2)
+            img.draw_string(i.x(), i.y()+24, '%.3f'%i.value(), color=(255, 0, 0), scale=2)
             a = lcd.display(img)
-            lcd.draw_string(i.x(), i.y(), classes[i.classid()], lcd.RED, lcd.WHITE)
-            lcd.draw_string(i.x(), i.y()+12, '%.3f'%i.value(), lcd.RED, lcd.WHITE)
     else:   
         a = lcd.display(img)
 a = kpu.deinit(task)
