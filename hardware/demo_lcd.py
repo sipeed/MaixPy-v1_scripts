@@ -11,6 +11,7 @@ lcd.init()
 #lcd.register(0x36, 0b01101000) # BGR2RGB Mode
 #lcd.register(0x21, None) # invert=True
 #lcd.register(0x20, None) # invert=False
+#lcd.register(0x36, [0b01101000, ]) # invert=True
 
 lcd.clear(lcd.RED)
 
