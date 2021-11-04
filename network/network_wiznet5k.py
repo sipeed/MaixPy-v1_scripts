@@ -73,7 +73,7 @@ if __name__ == '__main__':
           print("DHCP IP:", lan.ifconfig())
           break
     else:
-      lan.ifconfig((local_ip, local_netmask, local_gateway, local_dns_server))
+      lan.ifconfig()
 
     ############################## UDP Test ##############################
     # # The server must first know the client's IP and port number through the message sent by the client before it send the message to the client
