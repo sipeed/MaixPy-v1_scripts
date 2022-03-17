@@ -7,18 +7,19 @@ from fpioa_manager import fm
 sample_rate   = 16000
 record_time   = 4  #s
 
-#fm.register(8,  fm.fpioa.GPIO0, force=True)
-#wifi_en = GPIO(GPIO.GPIO0, GPIO.OUT)
-#wifi_en.value(0)
+#fm.register(8,  fm.fpioa.GPIO0, force=True)	
+#wifi_en = GPIO(GPIO.GPIO0, GPIO.OUT)	
+#wifi_en.value(0)	
 
 # bit & duino
+
 fm.register(20,fm.fpioa.I2S0_IN_D0, force=True)
-fm.register(18,fm.fpioa.I2S0_SCLK, force=True)
-fm.register(19,fm.fpioa.I2S0_WS, force=True)
+fm.register(18,fm.fpioa.I2S0_SCLK, force=True) # bit
+fm.register(19,fm.fpioa.I2S0_WS, force=True) # bit
 
-# fm.register(30,fm.fpioa.I2S0_WS, force=True)    # dock
-# fm.register(32,fm.fpioa.I2S0_SCLK, force=True)  # dock
-
+# fm.register(20,fm.fpioa.I2S0_IN_D0, force=True) # dock	
+# fm.register(32,fm.fpioa.I2S0_SCLK, force=True)  # dock	
+# fm.register(30,fm.fpioa.I2S0_WS, force=True)    # dock	
 
 rx = I2S(I2S.DEVICE_0)
 rx.channel_config(rx.CHANNEL_0, rx.RECEIVER, align_mode=I2S.STANDARD_MODE)
@@ -64,7 +65,7 @@ def on_timer(timer):
 
 try:
   # default: maix dock / maix duino set shift=0
-  t = maix_asr(0x500000, I2S.DEVICE_0, 3, shift=0) # maix bit set shift=1
+  t = maix_asr(0x500000, I2S.DEVICE_0, 3, shift=1) # maix bit set shift=1
   tim = Timer(Timer.TIMER0, Timer.CHANNEL0, mode=Timer.MODE_PERIODIC, period=64, callback=on_timer, arg=t)
   tim.start()
 
@@ -76,9 +77,9 @@ try:
   #t.run()
 
   t.config({
-    'xiao-ai-ya' : 0.3,
-    'hao-de-ya' : 0.2,
-    'ni-hao-ya' : 0.3,
+    'xiao-ai' : 0.3,
+    'hao-de' : 0.2,
+    'ni-hao' : 0.3,
   })
 
   print(t.get())
