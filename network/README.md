@@ -15,7 +15,7 @@ from network_esp32 import wifi
 
 from network_espat import wifi
 
-from network_w5k import lan
+from network_wiznet5k import lan
 ```
 
 ## example
