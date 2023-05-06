@@ -4,7 +4,7 @@
 
 - [network_esp32.py](./network_esp32.py)
 - [network_espat.py](./network_espat.py)
-- [network_espw5k.py](./network_wiznet5k.py)
+- [network_wiznet5k.py](./network_wiznet5k.py)
 
 > 使用 MaixPy IDE 的菜单功能【发送文件到板子】即可作为一个类库使用。
 
