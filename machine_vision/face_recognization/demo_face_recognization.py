@@ -92,12 +92,9 @@ while (1):
             for j in range(len(record_ftrs)):
                 score = kpu.face_compare(record_ftrs[j], feature)
                 scores.append(score)
-            max_score = 0
-            index = 0
-            for k in range(len(scores)):
-                if max_score < scores[k]:
-                    max_score = scores[k]
-                    index = k
+            else:
+                max_score = max(scores)
+                index = scores.index(max_score)
             if max_score > ACCURACY:
                 a = img.draw_string(i.x(), i.y(), ("%s :%2.1f" % (
                     names[index], max_score)), color=(0, 255, 0), scale=2)
