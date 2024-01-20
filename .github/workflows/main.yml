@@ -28,7 +28,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: sync shell cmd
         run: |
-          GITEE_GIT_ADDR="git@gitee.com:Sipeed/maixpy_scripts.git"
+          GITEE_GIT_ADDR="git@gitee.com:Sipeed/maixpy-v1_scripts.git"
           git fetch --unshallow
           SSHPATH="$HOME/.ssh"
           rm -rf "$SSHPATH"
